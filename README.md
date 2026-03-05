@@ -1,1 +1,1 @@
-# paretoool
+# paretotool
