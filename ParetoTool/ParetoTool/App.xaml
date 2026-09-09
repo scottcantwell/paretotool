@@ -41,7 +41,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="#E5E7EB"/>
             <Setter Property="Foreground" Value="#111827"/>
