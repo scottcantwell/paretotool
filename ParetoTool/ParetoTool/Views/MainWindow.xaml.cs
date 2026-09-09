@@ -5,6 +5,7 @@ using System.Windows;
 
 namespace ParetoTool;
 
+
 public partial class MainWindow : Window
 {
     public ObservableCollection<InputItem> InputItems { get; } = new();
