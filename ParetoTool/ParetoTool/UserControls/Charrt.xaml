@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="ParetoTool.ParetoChart"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Canvas x:Name="PlotCanvas" Background="Transparent"
+                SizeChanged="PlotCanvas_SizeChanged"
+                MouseMove="PlotCanvas_MouseMove"
+                MouseLeave="PlotCanvas_MouseLeave"/>
+        <Border x:Name="TooltipBorder"
+                Visibility="Collapsed"
+                Background="#F9FAFB"
+                BorderBrush="#D1D5DB"
+                BorderThickness="1"
+                CornerRadius="4"
+                Padding="8,6"
+                IsHitTestVisible="False"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+            <TextBlock x:Name="TooltipText" FontSize="12" Foreground="#111827"/>
+        </Border>
+    </Grid>
+</UserControl>
