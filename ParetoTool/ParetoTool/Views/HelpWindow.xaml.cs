@@ -21,7 +21,8 @@ namespace ParetoTool.Views
             if (this.Owner is MainWindow mainWindow)
             {
 
-
+                mainWindow.LoadSample(silent: false);
+                mainWindow.GenerateChart();
 
             }
             DialogResult = true;

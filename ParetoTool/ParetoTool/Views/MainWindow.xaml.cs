@@ -1,5 +1,6 @@
 ﻿using ParetoTool.Classes;
 using ParetoTool.Models;
+using ParetoTool.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -15,8 +16,8 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = this;
-        LoadSample(silent: true);
-        GenerateChart();
+        //LoadSample(silent: true);
+        //GenerateChart();
     }
 
 
@@ -31,6 +32,10 @@ public partial class MainWindow : Window
 
     private void Help_Click(object sender, RoutedEventArgs e)
     {
+
+        HelpWindow helpWindow = new HelpWindow() { Owner = this };
+
+        helpWindow.ShowDialog();
 
         //MessageBox.Show(
         //    "Instructions:\n\n" +
@@ -95,7 +100,7 @@ public partial class MainWindow : Window
         StatusText.Text = "Cleared.";
     }
 
-    private void GenerateChart()
+    public void GenerateChart()
     {
         var rows = ParetoCalculator.Transform(InputItems);
         ParetoRows.Clear();
@@ -119,7 +124,7 @@ public partial class MainWindow : Window
             $"~80% comes from {vital.Count} categor{(vital.Count == 1 ? "y" : "ies")}.";
     }
 
-    private void LoadSample(bool silent)
+    public void LoadSample(bool silent)
     {
         InputItems.Clear();
         InputItems.Add(new InputItem { Category = "Scratches", Value = 42 });
