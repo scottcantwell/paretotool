@@ -7,4 +7,10 @@
     <UseWPF>true</UseWPF>
     <ApplicationTitle>ParetoTool</ApplicationTitle>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="images\paretotoollogo_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\paretotoollogo_large.png" />
+  </ItemGroup>
 </Project>

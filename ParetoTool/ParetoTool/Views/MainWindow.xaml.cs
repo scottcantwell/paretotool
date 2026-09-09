@@ -48,6 +48,14 @@ public partial class MainWindow : Window
     }
 
 
+    private void NewChart_Click(object sender, RoutedEventArgs e)
+    {
+        InputItems.Clear();
+        ParetoRows.Clear();
+        Chart.SetData(ParetoRows);
+        StatusText.Text = "New chart created.";
+    }   
+
     private void InputData_Click(object sender, RoutedEventArgs e)
     {
         

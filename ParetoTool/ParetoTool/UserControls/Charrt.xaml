@@ -2,10 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
-        <Canvas x:Name="PlotCanvas" Background="Transparent"
+        <Canvas x:Name="PlotCanvas" 
                 SizeChanged="PlotCanvas_SizeChanged"
                 MouseMove="PlotCanvas_MouseMove"
-                MouseLeave="PlotCanvas_MouseLeave"/>
+                MouseLeave="PlotCanvas_MouseLeave">
+            <!--<Canvas.Background>
+                <ImageBrush ImageSource="//images/paretotoollogo_large.png" />
+            </Canvas.Background>-->
+        </Canvas>
         <Border x:Name="TooltipBorder"
                 Visibility="Collapsed"
                 Background="#F9FAFB"
