@@ -6,7 +6,7 @@
         WindowStartupLocation="CenterOwner"
         Height="Auto"
         ResizeMode="NoResize"
-        MinWidth="300" d:DesignHeight="195.222">
+        MinWidth="300" d:DesignHeight="195.222" Loaded="Window_Loaded">
     <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
