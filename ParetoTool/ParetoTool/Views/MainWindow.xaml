@@ -24,6 +24,10 @@
                 <Separator></Separator>
                 <MenuItem Header="_Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
             </MenuItem>
+            <MenuItem Header="_Actions">
+                <MenuItem Header="C_lear Data" Click="Clear_Click" x:Name="ClearMenuItem"></MenuItem>
+                <MenuItem Header="_Generate Chart" Click="Generate_Chart_Click" x:Name="GenerateMenuItem"/>
+            </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="_Chart" Click="Chart_Click" x:Name="ChartMenuItem" IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="_Input Data" Click="InputData_Click" x:Name="InputDataMenuItem" IsCheckable="True" IsChecked="True"/>

@@ -70,6 +70,11 @@ public partial class MainWindow : Window
 
     }
 
+    private void Generate_Chart_Click(object sender, RoutedEventArgs e)
+    {
+        GenerateChart();
+    }   
+
     private void Exit_Click(object sender, RoutedEventArgs e) => Close();
 
 
