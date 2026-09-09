@@ -2,8 +2,18 @@
 
 namespace ParetoTool.Classes;
 
+/// <summary>
+/// Provides functionality to transform a collection of input items into a list of Pareto rows, calculating ranks, percentages, and cumulative values for each category.
+/// </summary>
 public static class ParetoCalculator
 {
+    /// <summary>
+    /// Transforms a collection of input items into a list of Pareto rows, calculating ranks, percentages, and cumulative values for each category. 
+    /// Only valid items with non-empty categories and positive values are considered. The resulting list is sorted by value in
+    /// descending order and then by category name.
+    /// </summary>
+    /// <param name="items">The collection of input items to transform.</param>
+    /// <returns>A list of Pareto rows representing the transformed input items.</returns>
     public static List<ParetoRow> Transform(IEnumerable<InputItem> items)
     {
         var valid = items
