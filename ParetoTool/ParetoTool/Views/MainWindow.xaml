@@ -9,12 +9,24 @@
         FontFamily="Segoe UI" FontSize="13"
         Foreground="{StaticResource TextBrush}">
     <Grid Margin="10">
-        <Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/> 
+        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
             <ColumnDefinition Width="340" MinWidth="240"/>
             <ColumnDefinition Width="6"/>
             <ColumnDefinition Width="*" MinWidth="360"/>
         </Grid.ColumnDefinitions>
-
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Chart" Click="Chart_Click" x:Name="ChartMenuItem"/>
+                <MenuItem Header="_Input Data" Click="InputData_Click" x:Name="InputDataMenuItem"/>
+                <MenuItem Header="_Transformed Data" Click="TransformedData_Click" x:Name="TransformedDataMenuItem"/>
+            </MenuItem>
+        </Menu>
         <!-- LEFT: data entry -->
         <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource BorderBrushKey}" BorderThickness="1" CornerRadius="6" Padding="12">

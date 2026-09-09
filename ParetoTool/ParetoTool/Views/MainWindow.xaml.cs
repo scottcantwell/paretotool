@@ -18,6 +18,23 @@ public partial class MainWindow : Window
         GenerateChart();
     }
 
+    private void InputData_Click(object sender, RoutedEventArgs e)
+    {
+        
+    }
+
+    private void Chart_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+    private void TransformedData_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Exit_Click(object sender, RoutedEventArgs e) => Close();
+
+
     private void AddRow_Click(object sender, RoutedEventArgs e)
     {
         InputItems.Add(new InputItem { Category = "", Value = 0 });
