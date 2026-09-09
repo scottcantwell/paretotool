@@ -18,6 +18,29 @@ public partial class MainWindow : Window
         GenerateChart();
     }
 
+
+    private void About_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            "Pareto Chart Tool\n\n" +
+            "This tool allows you to input categories and their corresponding values, " +
+            "and generates a Pareto chart based on the data.\n\n"
+                    );
+    }
+
+    private void Help_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            "Instructions:\n\n" +
+            "1. Input your categories and values in the grid.\n" +
+            "2. Click 'Generate' to create the Pareto chart.\n" +
+            "3. Use 'Add Row' or 'Remove Row' to modify your data.\n" +
+            "4. Click 'Sample' to load example data.\n" +
+            "5. Click 'Clear' to reset the data.\n\n"
+                    );
+    }
+
+
     private void InputData_Click(object sender, RoutedEventArgs e)
     {
         

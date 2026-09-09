@@ -10,7 +10,8 @@
         Foreground="{StaticResource TextBrush}">
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/> 
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
             <ColumnDefinition Width="340" MinWidth="240"/>
@@ -26,9 +27,14 @@
                 <MenuItem Header="_Input Data" Click="InputData_Click" x:Name="InputDataMenuItem"/>
                 <MenuItem Header="_Transformed Data" Click="TransformedData_Click" x:Name="TransformedDataMenuItem"/>
             </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Help" Click="Help_Click" x:Name="HelpMenuItem"/>
+                <Separator x:Name="SeparatorOneMenuItem"/>
+                <MenuItem Header="_About" Click="About_Click" x:Name="AboutMenuItem"/>  
+            </MenuItem>
         </Menu>
         <!-- LEFT: data entry -->
-        <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
+        <Border Grid.Row ="1" Grid.Column="0" Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource BorderBrushKey}" BorderThickness="1" CornerRadius="6" Padding="12">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
@@ -77,7 +83,7 @@
                       ShowsPreview="True"/>
 
         <!-- RIGHT: chart + transformed data -->
-        <Grid Grid.Column="2">
+        <Grid Grid.Row ="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" MinHeight="180"/>
                 <RowDefinition Height="6"/>
