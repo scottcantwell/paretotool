@@ -19,24 +19,30 @@
             <ColumnDefinition Width="*" MinWidth="360"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New Chart" Click="NewChart_Click" x:Name="NewChartMenuItem"></MenuItem>
+            <MenuItem Header="File">
+                <MenuItem Header="New Chart" Click="NewChart_Click" x:Name="NewChartMenuItem"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="_Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
+                <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
             </MenuItem>
-            <MenuItem Header="_Actions">
-                <MenuItem Header="C_lear Data" Click="Clear_Click" x:Name="ClearMenuItem"></MenuItem>
-                <MenuItem Header="_Generate Chart" Click="Generate_Chart_Click" x:Name="GenerateMenuItem"/>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Cut" Click="Cut_Click" x:Name="CutMenuItem"/>
+                <MenuItem Header="Copy" Click="Copy_Click" x:Name="CopyMenuItem"/>
+                <MenuItem Header="Paste" Click="Paste_Click" x:Name="PasteMenuItem"/>
             </MenuItem>
-            <MenuItem Header="_View">
-                <MenuItem Header="_Chart" Click="Chart_Click" x:Name="ChartMenuItem" IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="_Input Data" Click="InputData_Click" x:Name="InputDataMenuItem" IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="_Transformed Data" Click="TransformedData_Click" x:Name="TransformedDataMenuItem" IsCheckable="True" IsChecked="True"/>
+            <MenuItem Header="Actions">
+                <MenuItem Header="Add Row" Click="AddRow_Click" x:Name="AddRowMenuItem"/>
+                <MenuItem Header="Clear Data" Click="Clear_Click" x:Name="ClearMenuItem"></MenuItem>
+                <MenuItem Header="Generate Chart" Click="Generate_Chart_Click" x:Name="GenerateMenuItem"/>
             </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem Header="_Help" Click="Help_Click" x:Name="HelpMenuItem"/>
+            <MenuItem Header="View">
+                <MenuItem Header="Chart" Click="Chart_Click" x:Name="ChartMenuItem" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="Input Data" Click="InputData_Click" x:Name="InputDataMenuItem" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="Transformed Data" Click="TransformedData_Click" x:Name="TransformedDataMenuItem" IsCheckable="True" IsChecked="True"/>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="Help" Click="Help_Click" x:Name="HelpMenuItem"/>
                 <Separator x:Name="SeparatorOneMenuItem"/>
-                <MenuItem Header="_About" Click="About_Click" x:Name="AboutMenuItem"/>  
+                <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>  
             </MenuItem>
         </Menu>
         <!-- LEFT: data entry -->

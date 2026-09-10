@@ -8,9 +8,9 @@ namespace ParetoTool;
 
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// The MainWindow class serves as the primary user interface for the Pareto Chart Tool application. It provides functionality for users to input categories and values, 
+/// generate Pareto charts, and manage the data through various UI elements such as buttons and menus.
 /// </summary>
-
 public partial class MainWindow : Window
 {
 
@@ -32,8 +32,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = this;
-        //LoadSample(silent: true);
-        //GenerateChart();
+     
     }
 
 
@@ -45,9 +44,8 @@ public partial class MainWindow : Window
     private void About_Click(object sender, RoutedEventArgs e)
     {
         MessageBox.Show(
-            "Pareto Chart Tool\n\n" +
             "This tool allows you to input categories and their corresponding values, " +
-            "and generates a Pareto chart based on the data.\n\n"
+            "and generates a Pareto chart based on the data.\n\n","ParetoTool", MessageBoxButton.OK,MessageBoxImage.Information
                     );
     }
 
@@ -90,8 +88,74 @@ public partial class MainWindow : Window
     {
 
     }
+
+    
     private void TransformedData_Click(object sender, RoutedEventArgs e)
     {
+
+    }
+
+    /// <summary>
+    /// Handles the click event for the "Cut" menu item, copying the selected input item's category and value to the clipboard in a tab-separated format.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
+    private void Cut_Click(object sender, RoutedEventArgs e)
+    {
+
+            Clipboard.GetText();
+
+            if (Clipboard.ContainsText() == true)
+            {
+
+            }
+
+       
+      
+    }
+
+
+    /// <summary>
+    /// Copies the selected text ti the clipboard.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Copy_Click(object sender, RoutedEventArgs e)
+    {
+
+        Clipboard.GetText();
+
+
+    }
+
+    /// <summary>
+    /// Handles the click event for the "Paste" menu item, retrieving text data from the clipboard and parsing it into input items.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
+    private void Paste_Click(object sender, RoutedEventArgs e)
+    {
+
+        if (Clipboard.ContainsText())
+        {
+            string clipboardText = Clipboard.GetText();
+            string[] lines = clipboardText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            foreach (string line in lines)
+            {
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    string[] parts = line.Split('\t');
+                    if (parts.Length >= 2)
+                    {
+                        string category = parts[0].Trim();
+                        if (double.TryParse(parts[1].Trim(), out double value))
+                        {
+                            InputItems.Add(new InputItem { Category = category, Value = value });
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -145,12 +209,23 @@ public partial class MainWindow : Window
     /// <param name="e"></param>
     private void Generate_Click(object sender, RoutedEventArgs e) => GenerateChart();
 
+    /// <summary>
+    /// Handles the click event for the "Sample" button, loading a sample set of defect data into the InputItems collection and generating the Pareto chart.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void Sample_Click(object sender, RoutedEventArgs e)
     {
         LoadSample(silent: false);
         GenerateChart();
     }
 
+    /// <summary>
+    /// Handles the click event for the "Clear" button, clearing the InputItems and ParetoRows collections, resetting the chart, 
+    /// and updating the status text to indicate that the data has been cleared.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void Clear_Click(object sender, RoutedEventArgs e)
     {
         InputItems.Clear();
