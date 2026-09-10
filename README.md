@@ -1,8 +1,15 @@
-ParetoTool
 
-WPF desktop app for building Pareto charts from category/value data. Enter items on the left, generate the chart and ranked table on the right, and resize the three panes with splitters.FeaturesEditable input grid (category + value)
+
+<img width="224" height="81" alt="ParetoToolLogo_Small" src="https://github.com/user-attachments/assets/292015ed-e80e-4a6b-a2d9-3bc535ef1f8a" />
+
+ParetoTool is a WPF desktop app for building Pareto charts from category/value data. Enter items on the left, generate the chart and ranked table on the right, and resize the three panes with splitters. 
+
+## Features
+
+Editable input grid (category + value)
 Add / remove rows, sample data, clear
-Duplicate categories are summed; blank names and values ≤ 0 are ignored
+Duplicate categories are summed; 
+Blank names and values ≤ 0 are ignored
 Pareto transform: sort descending, percent of total, cumulative value, cumulative %
 Custom-drawn chart (no third-party chart library)Bars for frequency
 Line for cumulative percentage
@@ -18,6 +25,7 @@ Windows (WPF)
 
 Project layout
 
+```Text
 ParetoTool/
 ├── ParetoTool.csproj
 ├── App.xaml
@@ -28,6 +36,7 @@ ParetoTool/
 ├── ParetoCalculator.cs
 ├── ParetoChart.xaml
 └── ParetoChart.xaml.cs
+```
 
 File
 Role
@@ -61,8 +70,11 @@ percentage=value/total×100\text{percentage} = \text{value} / \text{total} \time
 
 Running totals give cumulative value and cumulative %.
 
-The status line reports category count, grand total, and how many leading categories reach about 80% of the total (classic 80/20 view).UI layout
+The status line reports category count, grand total, and how many leading categories reach about 80% of the total (classic 80/20 view).
 
+UI layout
+
+```Text
 ┌─────────────────┬──┬──────────────────────────────┐
 │ Input data      │  │ Pareto chart                 │
 │ Category | Value│  │  bars + cumulative line      │
@@ -70,6 +82,7 @@ The status line reports category count, grand total, and how many leading catego
 │ [Add] [Remove]  │  │ Transformed data             │
 │ [Generate] ...  │  │ Rank | Category | Value | %  │
 └─────────────────┴──┴──────────────────────────────┘
+```
 
 ▓▓ = GridSplitter. Left column default width is 340px; the right side is split ~2/3 chart and ~1/3 table.NotesChart labels longer than 14 characters are shortened with Truncate in ParetoChart.xaml.cs.
 The chart redraws on resize (SizeChanged).
