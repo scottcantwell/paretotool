@@ -9,12 +9,19 @@ namespace ParetoTool.Views
     {
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the HelpWindow class, setting up the user interface components.
+        /// </summary>
         public HelpWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles the click event for the AddSampleData button, loading sample data into the main window's input grid and generating the chart.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void AddSampleData_Click(object sender, RoutedEventArgs e)
         {
             // Logic to add sample data to the main window's input grid
@@ -29,6 +36,12 @@ namespace ParetoTool.Views
             this.Close();
         }
 
+
+        /// <summary>
+        /// Handles the Loaded event of the HelpWindow, setting the window title and displaying instructions in the InstructionsText TextBlock.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // Set the window title
@@ -41,6 +54,11 @@ namespace ParetoTool.Views
            "5. Click 'Clear' to reset the data.\n\n";
         }
 
+        /// <summary>
+        /// Handles the click event for the Close button, closing the HelpWindow and setting the DialogResult to false.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;

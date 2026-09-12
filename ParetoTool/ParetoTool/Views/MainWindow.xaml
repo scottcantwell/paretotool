@@ -20,8 +20,6 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File">
-                <MenuItem Header="New Chart" Click="NewChart_Click" x:Name="NewChartMenuItem"></MenuItem>
-                <Separator></Separator>
                 <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
             </MenuItem>
             <MenuItem Header="Edit">
