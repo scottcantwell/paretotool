@@ -1,8 +1,15 @@
-
-
 <img width="224" height="81" alt="ParetoToolLogo_Small" src="https://github.com/user-attachments/assets/292015ed-e80e-4a6b-a2d9-3bc535ef1f8a" />
 
+
 ParetoTool is a WPF desktop app for building Pareto charts from category/value data. Enter items on the left, generate the chart and ranked table on the right, and resize the three panes with splitters. 
+
+<div align="center">
+
+
+[![GitHub Release](https://img.shields.io/github/v/release/scottcantwell/paretotool)](https://github.com/scottcantwell/paretotool/releases)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+</div>
 
 ## Features
 
