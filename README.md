@@ -7,7 +7,7 @@ ParetoTool is a WPF desktop app for building Pareto charts from category/value d
 
 
 [![GitHub Release](https://img.shields.io/github/v/release/scottcantwell/paretotool)](https://github.com/scottcantwell/paretotool/releases)
-![License](https://img.shields.io/badge/license-MIT-blue)
+![License](https://img.shields.io/badge/license-Apache-blue)
 
 </div>
 
