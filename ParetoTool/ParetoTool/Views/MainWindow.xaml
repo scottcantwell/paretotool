@@ -13,7 +13,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions>
             <ColumnDefinition Width="340" MinWidth="240"/>
             <ColumnDefinition Width="6"/>
             <ColumnDefinition Width="*" MinWidth="360"/>
@@ -40,48 +40,50 @@
             <MenuItem Header="Help">
                 <MenuItem Header="Help" Click="Help_Click" x:Name="HelpMenuItem"/>
                 <Separator x:Name="SeparatorOneMenuItem"/>
-                <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>  
+                <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
             </MenuItem>
         </Menu>
         <!-- LEFT: data entry -->
         <Border Grid.Row ="1" Grid.Column="0" Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource BorderBrushKey}" BorderThickness="1" CornerRadius="6" Padding="12">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <TextBlock Text="Input data" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                    <TextBlock Text="Enter categories and values. Empty or non-positive rows are ignored."
-                               TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}" Margin="0,0,0,10"/>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <StackPanel DockPanel.Dock="Top" Height="291">
+                    <GroupBox Header="Input Data" Margin="0,0,0,0" Height="620">
+                        <!--<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="Add row" Click="AddRow_Click"/>
                         <Button Content="Remove selected" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click"/>
-                    </StackPanel>
+                    </StackPanel>-->
+                        <DataGrid x:Name="InputGrid"
+           AutoGenerateColumns="False"
+           CanUserAddRows="True"
+           CanUserDeleteRows="True"
+           HeadersVisibility="Column"
+           GridLinesVisibility="Horizontal"
+           AlternatingRowBackground="#F8FAFC"
+           RowBackground="White"
+           BorderBrush="{StaticResource BorderBrushKey}"
+           BorderThickness="1"
+           Width="290"
+           Margin="6,0,6,0"
+           ItemsSource="{Binding InputItems}" Height="573">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                <DataGridTextColumn Header="Value" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                        <Button Content="Generate chart" Click="Generate_Click"/>
-                        <Button Content="Sample data" Style="{StaticResource SecondaryButton}" Click="Sample_Click"/>
-                        <Button Content="Clear" Style="{StaticResource SecondaryButton}" Click="Clear_Click"/>
+                        <!--<Button Content="Generate chart" Click="Generate_Click"/>-->
+                        <!--<Button Content="Sample data" Style="{StaticResource SecondaryButton}" Click="Sample_Click"/>-->
+                        <!--<Button Content="Clear" Style="{StaticResource SecondaryButton}" Click="Clear_Click"/>-->
                     </StackPanel>
                     <TextBlock x:Name="StatusText" Foreground="{StaticResource MutedBrush}" TextWrapping="Wrap"/>
                 </StackPanel>
 
-                <DataGrid x:Name="InputGrid"
-                          AutoGenerateColumns="False"
-                          CanUserAddRows="True"
-                          CanUserDeleteRows="True"
-                          HeadersVisibility="Column"
-                          GridLinesVisibility="Horizontal"
-                          AlternatingRowBackground="#F8FAFC"
-                          RowBackground="White"
-                          BorderBrush="{StaticResource BorderBrushKey}"
-                          BorderThickness="1"
-                          ItemsSource="{Binding InputItems}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                        <DataGridTextColumn Header="Value" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+
             </DockPanel>
         </Border>
 
