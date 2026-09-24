@@ -47,8 +47,8 @@
         <Border Grid.Row ="1" Grid.Column="0" Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource BorderBrushKey}" BorderThickness="1" CornerRadius="6" Padding="12">
             <DockPanel>
-                <StackPanel DockPanel.Dock="Top" Height="291">
-                    <GroupBox Header="Input Data" Margin="0,0,0,0" Height="620">
+                <StackPanel DockPanel.Dock="Top" Height="590">
+                    <GroupBox Header="Input Data" Margin="0,0,0,0" Height="620" BorderBrush="Black">
                         <!--<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Button Content="Add row" Click="AddRow_Click"/>
                         <Button Content="Remove selected" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click"/>
@@ -65,7 +65,7 @@
            BorderThickness="1"
            Width="290"
            Margin="6,0,6,0"
-           ItemsSource="{Binding InputItems}" Height="573">
+           ItemsSource="{Binding InputItems}" Height="539">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                                 <DataGridTextColumn Header="Value" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
