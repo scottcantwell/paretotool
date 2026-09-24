@@ -163,6 +163,13 @@ public partial class MainWindow : Window
 
     private void Exit_Click(object sender, RoutedEventArgs e) => Close();
 
+    private void NewProject_Click(object sender, RoutedEventArgs e)
+    {
+        InputItems.Clear();
+        ParetoRows.Clear();
+        Chart.SetData(ParetoRows);
+       
+    }   
 
     /// <summary>
     /// Handles the click event for the "Add Row" button, adding a new empty input item to the InputItems collection and updating the 
