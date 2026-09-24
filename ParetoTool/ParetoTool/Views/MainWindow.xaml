@@ -49,30 +49,39 @@
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Height="590">
                     <GroupBox Header="Input Data" Margin="0,0,0,0" Height="620" BorderBrush="Black">
-                        <!--<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Button Content="Add row" Click="AddRow_Click"/>
-                        <Button Content="Remove selected" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click"/>
-                    </StackPanel>-->
-                        <DataGrid x:Name="InputGrid"
-           AutoGenerateColumns="False"
-           CanUserAddRows="True"
-           CanUserDeleteRows="True"
-           HeadersVisibility="Column"
-           GridLinesVisibility="Horizontal"
-           AlternatingRowBackground="#F8FAFC"
-           RowBackground="White"
-           BorderBrush="{StaticResource BorderBrushKey}"
-           BorderThickness="1"
-           Width="290"
-           Margin="6,0,6,0"
-           ItemsSource="{Binding InputItems}" Height="539">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                                <DataGridTextColumn Header="Value" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <DockPanel>
+                            <ToolBarPanel DockPanel.Dock="Top" Margin="0,0,0,8" x:Name="InputDataToolBarPanel">
+                                <ToolBar>
+                                    <Button Content="Add" Click="AddRow_Click"/>
+                                    <Button Content="Remove" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click"/>
+                                    <Separator/>
+                                    <Button Content="Chart" Click="Generate_Chart_Click"/>
+                                    <Button Content="Clear" Style="{StaticResource SecondaryButton}" Click="Clear_Click"/>
+                                    <Separator/>
+                                    <Button Content="Sample data" Style="{StaticResource SecondaryButton}" Click="Sample_Click"/>
+                                </ToolBar>
+                            </ToolBarPanel>
+                            <DataGrid x:Name="InputGrid"
+                                      AutoGenerateColumns="False"
+                                      CanUserAddRows="True"
+                                      CanUserDeleteRows="True"
+                                      HeadersVisibility="Column"
+                                      GridLinesVisibility="Horizontal"
+                                      AlternatingRowBackground="#F8FAFC"
+                                      RowBackground="White"
+                                      BorderBrush="{StaticResource BorderBrushKey}"
+                                      BorderThickness="1"
+                                      Width="290"
+                                      Margin="6,0,6,0"
+                                      ItemsSource="{Binding InputItems}" Height="553">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                    <DataGridTextColumn Header="Value" Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
                     </GroupBox>
-                </StackPanel>
+            </StackPanel>
 
                 <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
