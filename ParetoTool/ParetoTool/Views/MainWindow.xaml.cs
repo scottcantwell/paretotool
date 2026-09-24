@@ -108,10 +108,10 @@ public partial class MainWindow : Window
 
 
     /// <summary>
-    /// Copies the selected text ti the clipboard.
+    /// Copies the selected text to the clipboard.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void Copy_Click(object sender, RoutedEventArgs e)
     {
 
@@ -179,8 +179,8 @@ public partial class MainWindow : Window
     /// <summary>
     /// Handles the click event for the "Remove Row" button, removing the selected input item from the InputItems collection if one is selected,
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void RemoveRow_Click(object sender, RoutedEventArgs e)
     {
         if (InputGrid.SelectedItem is InputItem item)
