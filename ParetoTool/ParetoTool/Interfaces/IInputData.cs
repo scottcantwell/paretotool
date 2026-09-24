@@ -1,4 +1,4 @@
-﻿namespace ParetoTool.Models
+﻿namespace ParetoTool.Interfaces
 {
     /// <summary>
     /// Defines an interface for input data that can be associated with a Project.
