@@ -14,9 +14,9 @@ namespace ParetoTool.Models
     internal class Project : INotifyPropertyChanged
     {
 
-        private Guid _id = Guid.NewGuid(); 
+        private Guid _id = Guid.NewGuid();
 
-        private string _name = string.Empty;    
+        private string _name = string.Empty;
 
         private string _version = "1.0.0";
 
@@ -26,7 +26,7 @@ namespace ParetoTool.Models
 
         private DateTime _updatedDate = DateTime.Now;
 
-        private DateTime _createdDate = DateTime.Now;   
+        private DateTime _createdDate = DateTime.Now;
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -78,7 +78,7 @@ namespace ParetoTool.Models
         /// Gets or sets the version of the project. This property is initialized to "1.0.0" and can be updated to reflect changes or updates to the project over time.
         /// </summary>
         [JsonProperty(PropertyName = "projectVersion")]
-        public string ProjectVersion { get => _version; set => _version = value; }  
+        public string ProjectVersion { get => _version; set => _version = value; }
 
         /// <summary>
         /// Gets or sets the input data associated with the project. This property can hold any object that implements the IInputData interface,
@@ -114,6 +114,20 @@ namespace ParetoTool.Models
             Name = name;
             Description = description;
             Author = author;
+
+        }
+
+
+        public void Reset()
+        {
+            IsDirty = false;
+        }
+
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            IsDirty = true;
 
         }
 
