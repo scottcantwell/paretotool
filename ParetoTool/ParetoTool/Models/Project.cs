@@ -1,6 +1,4 @@
-﻿
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using ParetoTool.Interfaces;
 using System.ComponentModel;
 

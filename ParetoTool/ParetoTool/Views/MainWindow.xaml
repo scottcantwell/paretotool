@@ -21,6 +21,7 @@
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File">
                 <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
+                <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
                 <Separator x:Name="SeparatorTwoMenuItem"/>  
                 <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
             </MenuItem>

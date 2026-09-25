@@ -3,6 +3,7 @@ using ParetoTool.Models;
 using ParetoTool.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Xml.Serialization;
 
 namespace ParetoTool;
 
@@ -75,6 +76,12 @@ public partial class MainWindow : Window
     {
         
     }
+
+   
+
+    private void OpenProject_Click(object sender, RoutedEventArgs e)
+    {
+    }   
 
     private void Chart_Click(object sender, RoutedEventArgs e)
     {

@@ -6,7 +6,9 @@
     public interface IInputData
     {
 
+        Guid Id { get; set; }
 
+        string Typename { get; }
 
     }
 
