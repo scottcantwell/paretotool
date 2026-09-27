@@ -92,7 +92,24 @@ namespace ParetoTool.Models
         public bool IsDirty { get; private set; } = false;
 
         /// <summary>
-        /// Gets or sets the tags associated with the project. This property is initialized to an empty list and can be set to provide additional context or categorization for the project.
+        /// Adds a tag to the project's list of tags. If the Tags property is null, it initializes it to a new list before adding the tag.
+        /// </summary>
+        /// <param name="tag">The tag to add to the project.</param>
+        public void AddTag(Tag tag)
+        {
+            if (Tags == null)
+            {
+                Tags = new List<Tag>();
+            }
+            var tagsList = Tags.ToList();
+            tagsList.Add(tag);
+            Tags = tagsList;
+            OnPropertyChanged(nameof(Tags));    
+        }   
+
+        /// <summary>
+        /// Gets or sets the tags associated with the project. This property is initialized to an empty list and can be set to
+        /// provide additional context or categorization for the project.
         /// </summary>
         [JsonProperty(PropertyName = "tags")]
         public IEnumerable<Tag> Tags { get; set; } = new List<Tag>(); 
