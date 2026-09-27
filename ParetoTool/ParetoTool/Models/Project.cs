@@ -153,6 +153,10 @@ namespace ParetoTool.Models
 
         }
 
+        internal void RemoveTag(Tag oldTag)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

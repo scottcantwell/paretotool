@@ -11,6 +11,8 @@ namespace ParetoTool.ViewModels
 
     public partial class DelimitedFileImportViewModel : ObservableObject
     {
+
+
         private readonly List<string> _rawLines = new();
 
         public DelimitedFileImportViewModel()
