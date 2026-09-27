@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using ParetoTool.Models;
+using System.Text.RegularExpressions;
 
 namespace ParetoTool.ViewModels
 {
@@ -21,7 +23,7 @@ namespace ParetoTool.ViewModels
 
         public string WindowTitle => _windowTitle;
         
-        private string _windowTitle = "Pareto Tool - New Project";
+        private string _windowTitle = "ParetoTool - New Project";
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(CanSave))]
@@ -131,10 +133,8 @@ namespace ParetoTool.ViewModels
 
                 }
 
-
             }
 
-          
         }
 
         [RelayCommand]
@@ -165,7 +165,50 @@ namespace ParetoTool.ViewModels
           
             _project.Id = Guid.NewGuid();
 
-            //Save the project to the file.
+            var files = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "*.pareto");
+
+            List<int> fileCounts = new List<int>();
+
+            string newProjectFilename = "NewProject";
+
+            Regex filecountRegex = new Regex(@"NewProject(\d+)\.pareto");
+
+            foreach ( var file in files )
+            {
+
+                if (filecountRegex.IsMatch(System.IO.Path.GetFileName(file)))
+                {
+                    var match = filecountRegex.Match(System.IO.Path.GetFileName(file));
+                    if (match.Success && int.TryParse(match.Groups[1].Value, out int count))
+                    {
+                        fileCounts.Add(count);
+                    }
+                }
+
+            }
+
+            int fileCount = fileCounts.Count > 0 ? fileCounts.Max() + 1 : 1;
+
+            newProjectFilename = $"NewProject{fileCount}";
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "ParetoTool files (*.pareto)|*.pareto|All files (*.*)|*.*",
+                Title = "Save Project As...",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),                 
+
+                FileName = $"{newProjectFilename}.pareto"
+
+            };  
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                _project.Save(saveFileDialog.FileName);
+            }
+            else
+            {
+                return false;
+            }   
 
             _project.Reset();
 
@@ -185,6 +228,8 @@ namespace ParetoTool.ViewModels
             var currentProject = Models.ParetoTool.CurrentProject;
 
             //Save the current project to the file.
+
+            _project.Save("");
 
             //Remove the current project from the ParetoTool
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ParetoTool.Classes;
 using ParetoTool.Interfaces;
 using System.ComponentModel;
 
@@ -91,6 +92,9 @@ namespace ParetoTool.Models
         [JsonIgnore]
         public bool IsDirty { get; private set; } = false;
 
+        [JsonIgnore]
+        public string FilePath { get; private set; } = string.Empty;
+
         /// <summary>
         /// Adds a tag to the project's list of tags. If the Tags property is null, it initializes it to a new list before adding the tag.
         /// </summary>
@@ -157,5 +161,41 @@ namespace ParetoTool.Models
         {
             throw new NotImplementedException();
         }
+
+        public void Save(string filePath)
+        {
+            FilePath = filePath;
+            string json = JSONUtil.SerializeObject(this);   
+            System.IO.File.WriteAllText(filePath, json);
+        }
+
+        public void Load(string filePath)
+        {
+
+            FilePath = filePath;
+
+            string json = System.IO.File.ReadAllText(filePath);
+
+            Project? loadedProject = JSONUtil.DeserializeObject<Project>(json); 
+
+            if (loadedProject != null)
+            {
+
+                Id = loadedProject.Id;
+                Name = loadedProject.Name;
+                Description = loadedProject.Description;
+                Author = loadedProject.Author;
+                CreatedDate = loadedProject.CreatedDate;
+                UpdatedDate = loadedProject.UpdatedDate;
+                AppVersion = loadedProject.AppVersion;
+                ProjectVersion = loadedProject.ProjectVersion;
+                InputData = loadedProject.InputData;
+                Tags = loadedProject.Tags;
+
+
+            }
+
+        }
+
     }
 }
