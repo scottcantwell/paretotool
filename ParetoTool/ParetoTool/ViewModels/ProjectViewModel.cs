@@ -44,7 +44,7 @@ namespace ParetoTool.ViewModels
                     //Save Existing Project
                     if (_project.Id != Guid.Empty)
                     {
-                       
+                     
                         var currentProject = Models.ParetoTool.CurrentProject;
 
                         //Save the current project
