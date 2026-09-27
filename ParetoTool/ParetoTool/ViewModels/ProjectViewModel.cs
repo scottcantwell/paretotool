@@ -216,6 +216,8 @@ namespace ParetoTool.ViewModels
 
             _windowTitle = $"Pareto Tool - {_project.Name}";
 
+            
+
             _save = false;
 
             return true;
@@ -227,11 +229,7 @@ namespace ParetoTool.ViewModels
            
             var currentProject = Models.ParetoTool.CurrentProject;
 
-            //Save the current project to the file.
-
             _project.Save("");
-
-            //Remove the current project from the ParetoTool
 
             if (currentProject != null)
             {
@@ -242,11 +240,12 @@ namespace ParetoTool.ViewModels
 
             _project.Reset();
 
-            //Add the updated project to the ParetoTool
             Models.ParetoTool.AddProject(_project);
 
             _windowTitle = $"Pareto Tool - {_project.Name}";
+            
             _save = false;
+           
             return true;
 
         }

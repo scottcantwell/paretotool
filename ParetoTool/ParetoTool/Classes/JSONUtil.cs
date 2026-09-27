@@ -1,4 +1,6 @@
-﻿namespace ParetoTool.Classes
+﻿using Newtonsoft.Json;
+
+namespace ParetoTool.Classes
 {
 
     /// <summary>
@@ -15,7 +17,7 @@
         /// <returns>A JSON string representation of the object.</returns>
         public static string SerializeObject<T>(T obj)
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented);
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }
 
         /// <summary>
@@ -24,9 +26,17 @@
         /// <typeparam name="T">The type of the object to deserialize to.</typeparam>
         /// <param name="json">The JSON string to deserialize.</param>
         /// <returns>An object of the specified type deserialized from the JSON string.</returns>
-        public static T DeserializeObject<T>(string json)
+        public static T? DeserializeObject<T>(string json)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+
+            var result = JsonConvert.DeserializeObject<T>(json);
+
+            if (result == null)
+            {
+                return default(T);
+            }
+
+            return result;
         }   
 
     }

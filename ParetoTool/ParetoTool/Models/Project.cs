@@ -92,8 +92,19 @@ namespace ParetoTool.Models
         [JsonIgnore]
         public bool IsDirty { get; private set; } = false;
 
+        /// <summary>
+        /// Gets the file path where the project is saved. This property is not serialized to JSON and is 
+        /// used internally to track the location of the project's file.
+        /// </summary>
         [JsonIgnore]
         public string FilePath { get; private set; } = string.Empty;
+
+        /// <summary>
+        /// Gets the filename of the project file from the FilePath property. This property is not serialized to JSON and is 
+        /// used internally to retrieve the name of the file without its directory path.
+        /// </summary>
+        [JsonIgnore]
+        public string Filename => System.IO.Path.GetFileName(FilePath); 
 
         /// <summary>
         /// Adds a tag to the project's list of tags. If the Tags property is null, it initializes it to a new list before adding the tag.
@@ -167,6 +178,8 @@ namespace ParetoTool.Models
             FilePath = filePath;
             string json = JSONUtil.SerializeObject(this);   
             System.IO.File.WriteAllText(filePath, json);
+
+            
         }
 
         public void Load(string filePath)
