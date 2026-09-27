@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParetoTool.Views" xmlns:local1="clr-namespace:ParetoTool.Controls"
         mc:Ignorable="d"
-        MinHeight="245"
+        MinHeight="25"
         Title="Project" Height="245" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="RoundedTextBox" TargetType="TextBox">
@@ -54,12 +54,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Margin="5,2,0,2" x:Name="ProjectName">Project Name:</Label>
-        <TextBox Grid.Column="1" x:Name="ProjectNameTextBox" Margin="5,6,14,5" Style="{StaticResource RoundedTextBox}" TextWrapping="NoWrap">
+        <TextBox Grid.Column="1" x:Name="ProjectNameTextBox" Margin="5,6,14,5" Style="{StaticResource RoundedTextBox}" TextWrapping="NoWrap" Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <Label Grid.Row="1" Grid.Column="0" x:Name="ProjectDescriptionValue" Margin="5,1,0,38">Project Description:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ProjectDescriptionTextBox" Margin="5,6,15,9" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ProjectDescriptionTextBox" Margin="5,6,15,9" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap" Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Grid.Row="2" Grid.Column="0" x:Name="ProjectTags" Margin="5,2,0,44">Tags:</Label>
-        <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9"/>
+        <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9" Tags="{Binding Tags}"/>
         <Button x:Name="SaveButton" Grid.Row="3" Grid.Column="1" Content="Save" IsEnabled="False" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,107,75" Click="SaveProject_Click"/>
         <Button Grid.Row="3" Grid.Column="1" x:Name="CloseButton" Content="Close" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,14,75" Click="Close_Click"/>
     </Grid>
