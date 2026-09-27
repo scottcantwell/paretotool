@@ -1,29 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ParetoTool.Models;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using File = System.IO.File;
 
 namespace ParetoTool.ViewModels
 {
-    public sealed class EncodingOption
-    {
-        public string DisplayName { get; init; } = "";
-        public Encoding Encoding { get; init; } = Encoding.UTF8;
-    }
-
-    public sealed class DelimiterOption
-    {
-        public string DisplayName { get; init; } = "";
-        public string Value { get; init; } = "";
-        public bool IsCustom { get; init; }
-    }
-
-    public sealed class ColumnOption
-    {
-        public string Header { get; init; } = "";
-        public int Index { get; init; }
-    }
 
     public partial class DelimitedFileImportViewModel : ObservableObject
     {
