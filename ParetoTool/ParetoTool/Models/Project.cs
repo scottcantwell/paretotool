@@ -104,6 +104,7 @@ namespace ParetoTool.Models
         {
             CreatedDate = DateTime.Now;
             UpdatedDate = DateTime.Now;
+            Id = Guid.Empty;
         }
 
         /// <summary>
