@@ -22,7 +22,7 @@
         <Label Grid.Row="1" Grid.Column="0" x:Name="ProjectDescriptionValue" Margin="5,1,0,38">Project Description:</Label>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ProjectDescription" Margin="5,6,14,9"/>
         <Label Grid.Row="2" Grid.Column="0" x:Name="ProjectTags" Margin="5,2,0,44">Tags:</Label>
-        <!--<local:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9"/>-->
+        <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9"/>
         <Button x:Name="SaveButton" Grid.Row="3" Grid.Column="1" Content="Save" IsEnabled="False" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,107,75" Click="SaveProject_Click"/>
         <Button Grid.Row="3" Grid.Column="1" x:Name="CloseButton" Content="Close" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,14,75" Click="Close_Click"/>
     </Grid>

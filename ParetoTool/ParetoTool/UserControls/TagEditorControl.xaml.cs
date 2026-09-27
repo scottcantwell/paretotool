@@ -48,7 +48,7 @@ namespace ParetoTool.Controls
 
         public TagEditorControl()
         {
-            //InitializeComponent();
+            InitializeComponent();
             Tags = new ObservableCollection<string>();
             Loaded += (_, _) => UpdatePlaceholder();
         }
