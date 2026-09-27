@@ -24,6 +24,10 @@ namespace ParetoTool.ViewModels
         private string _windowTitle = "Pareto Tool - New Project";
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CanSave))]
+        private bool _save = false;
+
+        [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ProjectName))]
         private string _name = "New Project";
 
@@ -83,6 +87,7 @@ namespace ParetoTool.ViewModels
                 if (_project.Description != value)
                 {
                     _project.Description = value;
+                
                     OnPropertyChanged(nameof(ProjectDescription));
                 }
             }
@@ -100,8 +105,11 @@ namespace ParetoTool.ViewModels
                 }
             }
         }
-
-
+        public bool CanSave
+        {
+            get => _save;
+        }
+       
         [RelayCommand]
         public void SaveProject()
         {
@@ -128,7 +136,30 @@ namespace ParetoTool.ViewModels
 
           
         }
-                
+
+        [RelayCommand]
+        private void AddTag()
+        {
+            //var name = TagInput.Trim();
+            //if (string.IsNullOrWhiteSpace(name))
+            //    return;
+
+            //if (Tags.Any(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            //{
+            //    TagInput = string.Empty;
+            //    return;
+            //}
+
+            //Tags.Add(new Tag { Name = name });
+            //TagInput = string.Empty;
+        }
+
+        [RelayCommand]
+        private void RemoveTag(Tag tag)
+        {
+            Tags.Remove(tag);
+        }
+
         private bool SaveNewProject()
         {
           
@@ -141,6 +172,8 @@ namespace ParetoTool.ViewModels
             Models.ParetoTool.AddProject(_project);
 
             _windowTitle = $"Pareto Tool - {_project.Name}";
+
+            _save = false;
 
             return true;
 
@@ -167,8 +200,8 @@ namespace ParetoTool.ViewModels
             //Add the updated project to the ParetoTool
             Models.ParetoTool.AddProject(_project);
 
-            _windowTitle = $"Pareto Tool - {_project.Name}";    
-
+            _windowTitle = $"Pareto Tool - {_project.Name}";
+            _save = false;
             return true;
 
         }

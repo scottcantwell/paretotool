@@ -76,8 +76,6 @@ namespace ParetoTool.Models
         /// Gets or sets the delimiter used in the file for separating values. This property is used to specify how the data in the file is structured.
         /// </summary>
         public string Delimiter { get; set; } = string.Empty;
-
-
         public override string ToString()
         {
             
