@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ParetoTool.Views" xmlns:local1="clr-namespace:ParetoTool.Controls"
         mc:Ignorable="d"
         MinHeight="25"
-        Title="Project" Height="245" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize">
+        Title="{Binding WindowTitle}" Height="245" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <Style x:Key="RoundedTextBox" TargetType="TextBox">
             <Setter Property="Background" Value="White"/>

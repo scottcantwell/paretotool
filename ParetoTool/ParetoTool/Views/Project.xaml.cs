@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using ParetoTool.ViewModels;
+using System.Windows;
 
 namespace ParetoTool.Views
 {
@@ -11,6 +12,7 @@ namespace ParetoTool.Views
         public ProjectWindow()
         {
             InitializeComponent();
+            DataContext = new ProjectViewModel();
         }
         public void SaveProject_Click(object sender, RoutedEventArgs e)
         {

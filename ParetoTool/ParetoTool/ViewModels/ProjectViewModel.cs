@@ -19,6 +19,9 @@ namespace ParetoTool.ViewModels
 
         }
 
+        public string WindowTitle => _windowTitle;
+        
+        private string _windowTitle = "Pareto Tool - New Project";
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(ProjectName))]
@@ -137,6 +140,8 @@ namespace ParetoTool.ViewModels
 
             Models.ParetoTool.AddProject(_project);
 
+            _windowTitle = $"Pareto Tool - {_project.Name}";
+
             return true;
 
         }
@@ -162,6 +167,8 @@ namespace ParetoTool.ViewModels
             //Add the updated project to the ParetoTool
             Models.ParetoTool.AddProject(_project);
 
+            _windowTitle = $"Pareto Tool - {_project.Name}";    
+
             return true;
 
         }
@@ -180,7 +187,7 @@ namespace ParetoTool.ViewModels
 
             _project = project;
 
-
+            _windowTitle = $"Pareto Tool - {_project.Name}";    
 
         }
 
