@@ -1,11 +1,12 @@
-﻿<Window x:Class="ParetoTool.Views.Project"
+﻿<Window x:Class="ParetoTool.Views.ProjectWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParetoTool.Views" xmlns:local1="clr-namespace:ParetoTool.Controls"
         mc:Ignorable="d"
-        Title="Project" Height="225" Width="509">
+        MinHeight="230"
+        Title="Project" Height="230" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -18,7 +19,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Margin="5,2,0,2" x:Name="ProjectName">Project Name:</Label>
-        <TextBlock Grid.Column="1" x:Name="ProjectNameTextBlock" Margin="5,6,14,3"/>
+        <TextBlock Grid.Column="1" x:Name="ProjectNameTextBlock" Margin="5,6,14,3"></TextBlock>
         <Label Grid.Row="1" Grid.Column="0" x:Name="ProjectDescriptionValue" Margin="5,1,0,38">Project Description:</Label>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ProjectDescription" Margin="5,6,14,9"/>
         <Label Grid.Row="2" Grid.Column="0" x:Name="ProjectTags" Margin="5,2,0,44">Tags:</Label>

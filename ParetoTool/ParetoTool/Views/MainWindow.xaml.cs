@@ -3,7 +3,6 @@ using ParetoTool.Models;
 using ParetoTool.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Xml.Serialization;
 
 namespace ParetoTool;
 
@@ -175,7 +174,11 @@ public partial class MainWindow : Window
         InputItems.Clear();
         ParetoRows.Clear();
         Chart.SetData(ParetoRows);
-       
+
+        ProjectWindow projectWindow = new Views.ProjectWindow() { Owner = this }; 
+
+        projectWindow.Show();
+
     }   
 
     /// <summary>

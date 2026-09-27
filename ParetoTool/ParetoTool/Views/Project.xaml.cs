@@ -5,9 +5,9 @@ namespace ParetoTool.Views
     /// <summary>
     /// Interaction logic for Project.xaml
     /// </summary>
-    public partial class Project : Window
+    public partial class ProjectWindow : Window
     {
-        public Project()
+        public ProjectWindow()
         {
             InitializeComponent();
         }
