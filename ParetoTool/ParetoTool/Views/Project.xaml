@@ -57,7 +57,8 @@
         <TextBox Grid.Column="1" x:Name="ProjectNameTextBox" Margin="5,6,14,5" Style="{StaticResource RoundedTextBox}" TextWrapping="NoWrap" Text="{Binding ProjectName, UpdateSourceTrigger=PropertyChanged}" >
         </TextBox>
         <Label Grid.Row="1" Grid.Column="0" x:Name="ProjectDescriptionValue" Margin="5,1,0,38">Project Description:</Label>
-        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ProjectDescriptionTextBox" Margin="5,6,15,9" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap" Text="{Binding ProjectDescription, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ProjectDescriptionTextBox" Margin="5,6,15,9" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap" Text="{Binding ProjectDescription, 
+            UpdateSourceTrigger=PropertyChanged}" FontSize="10"/>
         <Label Grid.Row="2" Grid.Column="0" x:Name="ProjectTags" Margin="5,2,0,44">Tags:</Label>
         <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9" Tags="{Binding Tags}" />
         <Button x:Name="SaveButton" Grid.Row="3" Grid.Column="1" Content="Save" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,107,75" Click="SaveProject_Click" IsEnabled="{Binding CanSave}"/>

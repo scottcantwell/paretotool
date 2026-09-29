@@ -122,11 +122,11 @@
                             <DataTrigger Binding="{Binding Text.Length, RelativeSource={RelativeSource Self}}" Value="0">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Center">
+                                        <VisualBrush Stretch="None" AlignmentX="Center" AlignmentY="Bottom">
                                             <VisualBrush.Visual>
                                                 <TextBlock Text="Type a tag and press Enter"
                                                Foreground="#9A9A9A"
-                                               FontSize="13"
+                                               FontSize="13" TextAlignment="Center"
                                                Margin="2,0,0,0"/>
                                             </VisualBrush.Visual>
                                         </VisualBrush>

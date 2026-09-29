@@ -25,7 +25,7 @@ namespace ParetoTool.Classes
         /// </summary>
         /// <typeparam name="T">The type of the object to deserialize to.</typeparam>
         /// <param name="json">The JSON string to deserialize.</param>
-        /// <returns>An object of the specified type deserialized from the JSON string.</returns>
+        /// <returns>An object of the specified type deserialized from the JSON string, or null if deserialization fails.</returns>
         public static T? DeserializeObject<T>(string json)
         {
 
