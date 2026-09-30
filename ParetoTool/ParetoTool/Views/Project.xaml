@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ParetoTool.Views" xmlns:local1="clr-namespace:ParetoTool.Controls"
         mc:Ignorable="d"
         MinHeight="255"
-        Title="{Binding WindowTitle}" Height="255" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        Title="{Binding WindowTitle}" Height="275" Width="509" x:Name="ProjectWindowMain" Topmost="True" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" ResizeMode="NoResize" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <Style x:Key="RoundedTextBox" TargetType="TextBox">
             <Setter Property="Background" Value="White"/>
@@ -60,8 +60,17 @@
         <TextBox Grid.Row="1" Grid.Column="1" x:Name="ProjectDescriptionTextBox" Margin="5,6,15,9" Style="{StaticResource RoundedTextBox}" TextWrapping="Wrap" Text="{Binding ProjectDescription, 
             UpdateSourceTrigger=PropertyChanged}" FontSize="10"/>
         <Label Grid.Row="2" Grid.Column="0" x:Name="ProjectTags" Margin="5,2,0,44">Tags:</Label>
+        <Label Grid.Row="3" Grid.Column="0" x:Name="ProjectDataSource" Margin="5,1,0,76">Data Source:</Label>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5,2,14,88">
+            <CheckBox x:Name="ManualInputCheckBox" Content="Manual Entry"  IsChecked="{Binding IsDataSourceEnabled}" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <CheckBox x:Name="FileInputCheckBox" Content="File Input" IsChecked="{Binding IsDataSourceEnabled}" VerticalAlignment="Center"/>    
+            <CheckBox x:Name="DatabaseInputCheckBox" Content="Database Input" IsChecked="{Binding IsDataSourceEnabled}" VerticalAlignment="Center" Margin="5,0,0,0"/>   
+        </StackPanel>
         <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9" Tags="{Binding Tags}" />
-        <Button x:Name="SaveButton" Grid.Row="3" Grid.Column="1" Content="Save" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,107,75" Click="SaveProject_Click" IsEnabled="{Binding CanSave}"/>
-        <Button Grid.Row="3" Grid.Column="1" x:Name="CloseButton" Content="Close" Width="75" Height="30" HorizontalAlignment="Right" Margin="0,9,14,75" Click="Close_Click"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,14,42">
+            <Button x:Name="SaveButton" Content="Save" Width="75" Height="30" Click="SaveProject_Click" IsEnabled="{Binding CanSave}"/>
+            <Button x:Name="CloseButton" Content="Close" Width="75" Height="30" Click="Close_Click" Margin="5,0,0,0"/>
+        </StackPanel>
+
     </Grid>
 </Window>

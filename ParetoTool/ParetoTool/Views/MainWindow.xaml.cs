@@ -396,6 +396,11 @@ public partial class MainWindow : Window
           //    StatusText.Text = "Sample defect data loaded.";
     }
 
+    /// <summary>
+    /// Handles the click event for the "Save Project" menu item, allowing the user to save the current project to a Pareto project file (.pareto).
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void SaveProject_Click(object sender, RoutedEventArgs e)
     {
 
