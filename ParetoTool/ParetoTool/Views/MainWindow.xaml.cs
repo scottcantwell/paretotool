@@ -395,4 +395,23 @@ public partial class MainWindow : Window
       //  if (!silent)
           //    StatusText.Text = "Sample defect data loaded.";
     }
+
+    private void SaveProject_Click(object sender, RoutedEventArgs e)
+    {
+
+        SaveFileDialog saveFileDialog = new SaveFileDialog
+        {
+            Filter = "Pareto Project Files (*.pareto)|*.pareto|All files (*.*)|*.*",
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+            Title = "Save Pareto Project"
+        };
+
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            string filePath = saveFileDialog.FileName;
+            
+
+
+        }
+    }
 }

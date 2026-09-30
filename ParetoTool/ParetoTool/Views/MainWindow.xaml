@@ -23,6 +23,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
                 <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
+                <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem"/> 
                 <Separator x:Name="SeparatorTwoMenuItem"/>
                 <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
             </MenuItem>
