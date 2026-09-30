@@ -1,8 +1,9 @@
-﻿using ParetoTool.Classes;
+﻿using Microsoft.Win32;
+using ParetoTool.Classes;
+using ParetoTool.Interfaces;
 using ParetoTool.Models;
 using System.Collections.ObjectModel;
 using System.Windows;
-using ParetoTool.Controls;
 
 namespace ParetoTool.Views;
 
@@ -76,10 +77,93 @@ public partial class MainWindow : Window
         
     }
 
-   
 
+
+    /// <summary>
+    /// Handles the click event for the "Open Project" menu item, allowing the user to select a Pareto project file (.pareto) to load.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The event data.</param>
     private void OpenProject_Click(object sender, RoutedEventArgs e)
     {
+
+        OpenFileDialog openFileDialog = new OpenFileDialog
+        {
+            Filter = "Pareto Project Files (*.pareto)|*.pareto|All files (*.*)|*.*",
+
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),    
+
+            Title = "Open Pareto Project"
+        };
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            string filePath = openFileDialog.FileName;
+            try
+            {
+                string jsonContent = System.IO.File.ReadAllText(filePath);
+                Project? loadedProject = JSONUtil.DeserializeObject<Project>(jsonContent);
+                if (loadedProject != null)
+                {
+
+                    Title = $"ParetoTool - {loadedProject.Name}";
+                    
+                    Models.ParetoTool.AddProject(loadedProject);
+                    InputItems.Clear();
+                    ParetoRows.Clear();
+                    if (loadedProject.InputData is IInputData inputData)
+                    {
+
+                        if (inputData.Typename == "YourTypeNameHere")
+                        {
+
+                            switch (inputData.Typename)
+                            {
+                                case "FileInputData":
+                                   
+                                    break;
+
+                                case "ManualInputData":
+                                  
+                                    var manualInputData = loadedProject.InputData as ManualInputData;   
+
+                                    if (manualInputData != null)
+                                    {
+
+                                        foreach (var item in manualInputData.Items)
+                                        {
+                                            InputItems.Add(item);
+                                        }
+
+                                    }
+
+                                    break;
+                                default:
+                                    // Handle other types or do nothing
+                                    break;
+                            }
+
+                        }
+
+                        //foreach (var item in inputData.Items)
+                        //{
+                        //    InputItems.Add(item);
+                        //}
+                    }
+                    GenerateChart();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to load the project. The file may be corrupted or in an invalid format.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while loading the project: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
     }   
 
     private void Chart_Click(object sender, RoutedEventArgs e)

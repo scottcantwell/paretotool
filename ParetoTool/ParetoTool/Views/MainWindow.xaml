@@ -115,7 +115,7 @@
             <GroupBox Header="Transformed Data" BorderBrush="Black" Grid.Row="2" Margin="3,0,0,0">
                 <DockPanel Grid.Row="2">
                     <ToolBarPanel DockPanel.Dock="Top" Margin="2,4,0,2" x:Name="TransformedDataToolBarPanel">
-                        <ToolBar>
+                        <ToolBar BorderThickness="1">
                             <Button Content="Copy" Click="CopyTransformedData_Click"/>
                             <Button Content="Export" Style="{StaticResource SecondaryButton}" Click="ExportTransformedData_Click"/>
                         </ToolBar>
@@ -142,7 +142,7 @@
                               AlternatingRowBackground="#F8FAFC"
                               RowBackground="White"
                               BorderBrush="{StaticResource BorderBrushKey}"
-                              BorderThickness="1"
+                              BorderThickness="2"
                               ItemsSource="{Binding ParetoRows}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="60"/>
