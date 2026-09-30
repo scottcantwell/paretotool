@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ParetoTool;
+namespace ParetoTool.Controls;
 
 public partial class ParetoChart : UserControl
 {

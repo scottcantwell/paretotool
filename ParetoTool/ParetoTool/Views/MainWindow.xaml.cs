@@ -1,10 +1,10 @@
 ﻿using ParetoTool.Classes;
 using ParetoTool.Models;
-using ParetoTool.Views;
 using System.Collections.ObjectModel;
 using System.Windows;
+using ParetoTool.Controls;
 
-namespace ParetoTool;
+namespace ParetoTool.Views;
 
 
 /// <summary>
@@ -175,7 +175,7 @@ public partial class MainWindow : Window
         ParetoRows.Clear();
         Chart.SetData(ParetoRows);
 
-        ProjectWindow projectWindow = new Views.ProjectWindow() { Owner = this }; 
+        ProjectWindow projectWindow = new ProjectWindow() { Owner = this }; 
 
         projectWindow.Show();
 
@@ -190,7 +190,7 @@ public partial class MainWindow : Window
     private void AddRow_Click(object sender, RoutedEventArgs e)
     {
         InputItems.Add(new InputItem { Category = "", Value = 0 });
-        StatusText.Text = "Row added.";
+        //StatusText.Text = "Row added.";
     }
 
     /// <summary>
@@ -203,11 +203,11 @@ public partial class MainWindow : Window
         if (InputGrid.SelectedItem is InputItem item)
         {
             InputItems.Remove(item);
-            StatusText.Text = "Row removed.";
+           // StatusText.Text = "Row removed.";
         }
         else
         {
-            StatusText.Text = "Select a row to remove.";
+            //StatusText.Text = "Select a row to remove.";
         }
     }
 
@@ -240,7 +240,7 @@ public partial class MainWindow : Window
         InputItems.Clear();
         ParetoRows.Clear();
         Chart.SetData(ParetoRows);
-        StatusText.Text = "Cleared.";
+        //StatusText.Text = "Cleared.";
     }
 
     /// <summary>
@@ -258,7 +258,7 @@ public partial class MainWindow : Window
 
         if (rows.Count == 0)
         {
-            StatusText.Text = "No valid rows. Add categories with values greater than zero.";
+           // StatusText.Text = "No valid rows. Add categories with values greater than zero.";
             return;
         }
 
@@ -266,10 +266,32 @@ public partial class MainWindow : Window
         if (vital.Count == 0)
             vital.Add(rows[0]);
 
-        StatusText.Text =
-            $"{rows.Count} categories · total {rows.Last().CumulativeValue:0.##} · " +
-            $"~80% comes from {vital.Count} categor{(vital.Count == 1 ? "y" : "ies")}.";
+       // StatusText.Text =
+            //$"{rows.Count} categories · total {rows.Last().CumulativeValue:0.##} · " +
+            //$"~80% comes from {vital.Count} categor{(vital.Count == 1 ? "y" : "ies")}.";
     }
+
+    public void ExportTransformedData_Click(object sender, RoutedEventArgs e)
+    {
+       
+    }   
+
+    private void CopyTransformedData_Click(object sender, RoutedEventArgs e)
+    {
+        if (ParetoRows.Count == 0)
+        {
+           
+            return;
+        }
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("Rank\tCategory\tValue\tPercentage\tCumulative Value\tCumulative Percentage");
+        foreach (var row in ParetoRows)
+        {
+            sb.AppendLine($"{row.Rank}\t{row.Category}\t{row.Value}\t{row.Percentage:0.##}\t{row.CumulativeValue:0.##}\t{row.CumulativePercentage:0.##}");
+        }
+        Clipboard.SetText(sb.ToString());
+        
+    }   
 
     /// <summary>
     /// Loads a sample set of defect data into the InputItems collection. This method clears any existing input items and adds predefined categories with their corresponding values.
@@ -286,7 +308,7 @@ public partial class MainWindow : Window
         InputItems.Add(new InputItem { Category = "Wrong color", Value = 6 });
         InputItems.Add(new InputItem { Category = "Packaging", Value = 4 });
         InputItems.Add(new InputItem { Category = "Other", Value = 3 });
-        if (!silent)
-            StatusText.Text = "Sample defect data loaded.";
+      //  if (!silent)
+          //    StatusText.Text = "Sample defect data loaded.";
     }
 }
