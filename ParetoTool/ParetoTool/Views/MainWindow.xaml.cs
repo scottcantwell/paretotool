@@ -419,4 +419,23 @@ public partial class MainWindow : Window
 
         }
     }
+
+    private void Refresh_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void FromFile_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void FromManualEntry_Click(object sender, RoutedEventArgs e)
+    {
+    }
+
+    private void FromDatabase_Click(object sender, RoutedEventArgs e)
+    {
+    }   
+
 }

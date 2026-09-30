@@ -48,20 +48,32 @@
                 <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
             </MenuItem>
         </Menu>
-
+        <Ribbon Grid.ColumnSpan="3" Margin="0,25,10,2" Height="50">
+            <RibbonGroup x:Name="GetDataRibbonGroup">
+            <RibbonSplitButton Label="Get Data" Click="FromFile_Click">
+                <RibbonMenuItem Header="From Database" Click="FromDatabase_Click" IsChecked="False" IsCheckable="True"/>
+                <RibbonMenuItem Header="From File" Click="FromFile_Click" IsChecked="False" IsCheckable="True"/>
+                <RibbonMenuItem Header="From Manual Entry" Click="FromManualEntry_Click" IsChecked="False" IsCheckable="True"/>
+                <RibbonSeparator/>
+            </RibbonSplitButton>
+                <RibbonButton Label="Recent Connections">
+                </RibbonButton>
+            </RibbonGroup>
+        </Ribbon>
         <GroupBox Grid.Row="1" Grid.Column="0"
                   Header="Input Data"
                   BorderBrush="Black">
             <DockPanel>
                 <ToolBarPanel DockPanel.Dock="Top" Margin="0,0,0,8" x:Name="InputDataToolBarPanel">
                     <ToolBar>
-                        <Button Content="Add" Click="AddRow_Click"/>
-                        <Button Content="Remove" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click"/>
+                        <Button Content="Add" Click="AddRow_Click" Visibility="Visible"/>
+                        <Button Content="Refresh" Visibility="Hidden" Click="Refresh_Click"/>
+                        <Button Content="Remove" Style="{StaticResource SecondaryButton}" Click="RemoveRow_Click" Visibility="Visible"/>
                         <Separator/>
-                        <Button Content="Chart" Click="Generate_Chart_Click"/>
-                        <Button Content="Clear" Style="{StaticResource SecondaryButton}" Click="Clear_Click"/>
+                        <Button Content="Chart" Click="Generate_Chart_Click" Visibility="Visible"/>
+                        <Button Content="Clear" Style="{StaticResource SecondaryButton}" Click="Clear_Click" Visibility="Visible"/>
                         <Separator/>
-                        <Button Content="Sample data" Style="{StaticResource SecondaryButton}" Click="Sample_Click"/>
+                        <Button Content="Sample Data" Style="{StaticResource SecondaryButton}" Click="Sample_Click" Visibility="Visible"/>
                     </ToolBar>
                 </ToolBarPanel>
                 <DataGrid x:Name="InputGrid"
