@@ -1,4 +1,5 @@
-﻿using ParetoTool.Interfaces;
+﻿using ParetoTool.Enums;
+using ParetoTool.Interfaces;
 using System.IO;
 
 namespace ParetoTool.Models
@@ -23,7 +24,7 @@ namespace ParetoTool.Models
         /// <summary>
         /// Gets the type name of the input data source, which is "FileInputData" for this class.   
         /// </summary>
-        public string Typename { get => nameof(FileInputData); }    
+        public DataSource DataSourceType { get => DataSource.File; }    
 
         /// <summary>
         /// Returns a string representation of the FileInputData object, including its Id and FilePath.

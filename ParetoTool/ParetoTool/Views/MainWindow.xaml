@@ -48,17 +48,23 @@
                 <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
             </MenuItem>
         </Menu>
-        <Ribbon Grid.ColumnSpan="3" Margin="0,25,10,2" Height="50">
-            <RibbonGroup x:Name="GetDataRibbonGroup">
-            <RibbonSplitButton Label="Get Data" Click="FromFile_Click">
-                <RibbonMenuItem Header="From Database" Click="FromDatabase_Click" IsChecked="False" IsCheckable="True"/>
-                <RibbonMenuItem Header="From File" Click="FromFile_Click" IsChecked="False" IsCheckable="True"/>
-                <RibbonMenuItem Header="From Manual Entry" Click="FromManualEntry_Click" IsChecked="False" IsCheckable="True"/>
-                <RibbonSeparator/>
-            </RibbonSplitButton>
-                <RibbonButton Label="Recent Connections">
-                </RibbonButton>
+        <Ribbon Grid.ColumnSpan="3" Margin="0,25,10,0">
+            
+                <RibbonGroup x:Name="GetDataRibbonGroup" Width="95" BorderThickness="0" Height="30" Header="Database Source" Visibility="Visible">
+                    <!--<StackPanel Orientation="Horizontal">
+                    <RibbonSplitButton Label="Get Data" Height="120">
+                    <RibbonMenuItem Header="From Database" Click="FromDatabase_Click" IsChecked="False" IsCheckable="True"/>
+                    <RibbonMenuItem Header="From File" Click="FromFile_Click" IsChecked="False" IsCheckable="True"/>
+                    <RibbonMenuItem Header="From Manual Entry" Click="FromManualEntry_Click" IsChecked="False" IsCheckable="True"/>
+                    <RibbonSeparator/>
+                    </RibbonSplitButton>
+                    <RibbonButton Label="From CSV"></RibbonButton>
+                    <RibbonButton Label="Recent Connections"></RibbonButton>
+                </StackPanel>-->
+                <!--<RibbonGroup x:Name="DatabaseRibbonGroup" Width="202" BorderThickness="1" ></RibbonGroup>-->
             </RibbonGroup>
+          
+
         </Ribbon>
         <GroupBox Grid.Row="1" Grid.Column="0"
                   Header="Input Data"

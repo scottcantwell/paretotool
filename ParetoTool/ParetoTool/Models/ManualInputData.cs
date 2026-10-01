@@ -1,4 +1,5 @@
-﻿using ParetoTool.Interfaces;
+﻿using ParetoTool.Enums;
+using ParetoTool.Interfaces;
 
 namespace ParetoTool.Models
 {
@@ -10,7 +11,7 @@ namespace ParetoTool.Models
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public List<InputItem> Items { get; set; } = new List<InputItem>();
-        public string Typename { get => nameof(ManualInputData); }
+        public DataSource DataSourceType { get => DataSource.Manual ; }
     }
 
 }

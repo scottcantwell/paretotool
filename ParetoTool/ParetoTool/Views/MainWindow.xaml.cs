@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ParetoTool.Classes;
+using ParetoTool.Enums;
 using ParetoTool.Interfaces;
 using ParetoTool.Models;
 using System.Collections.ObjectModel;
@@ -114,16 +115,16 @@ public partial class MainWindow : Window
                     if (loadedProject.InputData is IInputData inputData)
                     {
 
-                        if (inputData.Typename == "YourTypeNameHere")
+                        if (inputData.DataSourceType == DataSource.Manual)
                         {
 
-                            switch (inputData.Typename)
+                            switch (inputData.DataSourceType)
                             {
-                                case "FileInputData":
+                                case DataSource.File:
                                    
                                     break;
 
-                                case "ManualInputData":
+                                case DataSource.Manual:
                                   
                                     var manualInputData = loadedProject.InputData as ManualInputData;   
 

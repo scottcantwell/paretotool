@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using ParetoTool.Classes;
+using ParetoTool.Enums;
 using ParetoTool.Interfaces;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace ParetoTool.Models
 {
@@ -84,6 +86,25 @@ namespace ParetoTool.Models
         /// </summary>
         [JsonProperty(PropertyName = "inputData")]
         public IInputData? InputData { get; set; } = null;
+
+        public void SetInputDataType(DataSource dataSourceType)
+        {
+            switch (dataSourceType)
+            {
+                case DataSource.Manual:
+                    InputData = new ManualInputData();
+                    break;
+                case DataSource.File:
+                    InputData = new FileInputData();
+                    break;
+                case DataSource.Database:
+                    InputData = new DatabaseInputData();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(dataSourceType), dataSourceType, null);
+            }   
+
+        }   
 
         /// <summary>
         /// Gets or sets a value indicating whether the project has unsaved changes. This property is not serialized to JSON and 

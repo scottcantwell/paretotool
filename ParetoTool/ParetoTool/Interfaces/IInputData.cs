@@ -1,4 +1,6 @@
-﻿namespace ParetoTool.Interfaces
+﻿using ParetoTool.Enums;
+
+namespace ParetoTool.Interfaces
 {
     /// <summary>
     /// Defines an interface for input data that can be associated with a Project.
@@ -8,7 +10,7 @@
 
         Guid Id { get; set; }
 
-        string Typename { get; }
+        DataSource DataSourceType { get; }
 
     }
 

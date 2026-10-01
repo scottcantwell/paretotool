@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using ParetoTool.Enums;
 using ParetoTool.Models;
 using System.Text.RegularExpressions;
 
@@ -41,6 +42,10 @@ namespace ParetoTool.ViewModels
         [NotifyPropertyChangedFor(nameof(Tags))]
         private List<Tag> tagsList = new List<Tag>();
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(DataSourceType))]
+        private DataSource _dataSource  = DataSource.Manual;
+
 
         public ProjectViewModel(string fileName)
         {
@@ -80,6 +85,19 @@ namespace ParetoTool.ViewModels
             }
         }
 
+
+        public DataSource DataSourceType
+        {
+            get => _project.InputData.DataSourceType;
+            set
+            {
+                if (_project.InputData.DataSourceType != value)
+                {
+                    _project.SetInputDataType(value);
+                    OnPropertyChanged(nameof(DataSourceType));
+                }
+            }
+        }   
 
         public string ProjectDescription
         {
