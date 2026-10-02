@@ -23,7 +23,12 @@
                 <MenuItem Header="File">
                     <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
                     <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
+                    <MenuItem Header="Edit Project" Click="EditProject_Click" x:Name="EditProjectMenuItem"/>
+                    <Separator></Separator>
                     <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem"/>
+                    <MenuItem Header="Save Project As..." Click="SaveProjectAs_Click" x:Name="SaveProjectAsMenuItem"/>
+                    <Separator x:Name="SeparatorOneMenuItem"/>
+                    <MenuItem Header="Recent Projects" x:Name="RecentProjectsMenuItem"></MenuItem>
                     <Separator x:Name="SeparatorTwoMenuItem"/>
                     <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
                 </MenuItem>
@@ -44,7 +49,7 @@
                 </MenuItem>
                 <MenuItem Header="Help">
                     <MenuItem Header="Help" Click="Help_Click" x:Name="HelpMenuItem"/>
-                    <Separator x:Name="SeparatorOneMenuItem"/>
+                    <Separator x:Name="SeparatorOneMenuItemHelp"/>
                     <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
                 </MenuItem>
             </Menu>

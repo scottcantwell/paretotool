@@ -437,6 +437,15 @@ public partial class MainWindow : Window
 
     private void FromDatabase_Click(object sender, RoutedEventArgs e)
     {
-    }   
+    }
 
+    private void EditProject_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void SaveProjectAs_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
