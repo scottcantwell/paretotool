@@ -25,6 +25,47 @@ namespace ParetoTool.Models.ProjectsDB
         [JsonProperty(PropertyName = "bytag")]
         public IEnumerable<TagDB> Tags { get; set; } = new List<TagDB>();
 
+        public void AddProject(ProjectDB project)
+        {
+            var projectsList = Projects.ToList();
+            projectsList.Add(project);
+            Projects = projectsList;
+        }   
+
+
+        public void RemoveProject(ProjectDB project)
+        {
+            var projectsList = Projects.ToList();
+            projectsList.Remove(project);
+            Projects = projectsList;
+        }
+
+        public IEnumerable<ProjectListDB> GetProjectsByTag(IEnumerable<string> tags, bool ignoreCase)
+        {
+
+            var projectsByTag = Projects
+                .Where(p => p.Tags.Any(t => tags.Contains(t.Tag, ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal)))
+                .Select(p => new ProjectListDB
+                {
+                    Id = p.Id,
+                    ProjectName = p.Name,
+                    Path = p.Path
+                });
+            return projectsByTag;
+
+
+        }
+
+        public void SaveProject(ProjectDB project)
+        {
+
+
+
+
+
+
+        }   
+
 
     }
 
@@ -57,6 +98,15 @@ namespace ParetoTool.Models.ProjectsDB
         [JsonProperty(PropertyName = "tags")]
         public IEnumerable<ProjectTagDB> Tags { get; set; } = new List<ProjectTagDB>();   
 
+        public void AddTag(ProjectTagDB tag)
+        {
+            var tagsList = Tags.ToList();
+            tagsList.Add(tag);
+            Tags = tagsList;
+        }   
+
+       
+
 
     }
 
@@ -70,12 +120,54 @@ namespace ParetoTool.Models.ProjectsDB
         /// <summary>
         /// Gets or sets the name of the tag. This property is initialized to an empty string.
         /// </summary>
+        [JsonProperty(PropertyName = "tag")]
         public string Tag { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the collection of project IDs associated with the tag. Each project ID is represented by a GUID.
         /// </summary>  
+        [JsonProperty(PropertyName = "projects")]
         public IEnumerable<Guid> Projects { get; set;} = new List<Guid>();
+
+        public void AddProject(Guid projectId)
+        {
+            var projectsList = Projects.ToList();
+            projectsList.Add(projectId);
+            Projects = projectsList;
+        }
+
+
+        public void RemoveProject(Guid projectId)
+        {
+            var projectsList = Projects.ToList();
+            projectsList.Remove(projectId);
+            Projects = projectsList;
+        }
+
+        public void RemoveTag(string tag)
+        {
+            if (Tag.Equals(tag, StringComparison.OrdinalIgnoreCase))
+            {
+                Tag = string.Empty;
+                Projects = new List<Guid>();
+            }
+        }   
+
+        public void AddTag(string tag)
+        {
+            if (string.IsNullOrWhiteSpace(Tag))
+            {
+                Tag = tag;
+            }
+        }   
+
+        //public void RemoveProject(Guid projectId)
+        //{
+        //    var projectsList = Projects.ToList();
+        //    projectsList.Remove(projectId);
+        //    Projects = projectsList;
+        //}
+
 
     }
     
@@ -88,6 +180,7 @@ namespace ParetoTool.Models.ProjectsDB
         /// <summary>
         /// Gets or sets the name of the tag. This property is initialized to an empty string.
         /// </summary>
+        [JsonProperty(PropertyName = "tag")]
         public string Tag { get; set; } = string.Empty;
       
     }

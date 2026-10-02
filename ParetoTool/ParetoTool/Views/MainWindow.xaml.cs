@@ -452,5 +452,11 @@ public partial class MainWindow : Window
     private void SearchForProject_Click(object sender, RoutedEventArgs e)
     {
 
+        ProjectSearch projectSearchWindow = new ProjectSearch() { Owner = this };
+
+        projectSearchWindow.Show();
+
+
+
     }
 }
