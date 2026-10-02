@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ParetoTool.Models
+namespace ParetoTool.Models.ProjectsDB
 {
 
     /// <summary>
