@@ -20,34 +20,35 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-                <MenuItem Header="File">
+                <MenuItem Header="File" x:Name="FileMenu">
                     <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
                     <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
                     <MenuItem Header="Edit Project" Click="EditProject_Click" x:Name="EditProjectMenuItem"/>
                     <Separator></Separator>
                     <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem"/>
                     <MenuItem Header="Save Project As..." Click="SaveProjectAs_Click" x:Name="SaveProjectAsMenuItem"/>
+                    <Separator></Separator>
+                    <MenuItem Header="Search for Project" Click="SearchForProject_Click" x:Name="SearchForProjectMenuItem"/>   
                     <Separator x:Name="SeparatorOneMenuItem"/>
-                    <MenuItem Header="Recent Projects" x:Name="RecentProjectsMenuItem"></MenuItem>
+                    <MenuItem Header="Recent Projects" x:Name="RecentProjectsMenuItem" IsEnabled="False">
+                    </MenuItem>
                     <Separator x:Name="SeparatorTwoMenuItem"/>
                     <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
                 </MenuItem>
-                <MenuItem Header="Edit">
-                    <MenuItem Header="Cut" Click="Cut_Click" x:Name="CutMenuItem"/>
+                <MenuItem Header="Edit" x:Name="EditMenu">
                     <MenuItem Header="Copy" Click="Copy_Click" x:Name="CopyMenuItem"/>
                     <MenuItem Header="Paste" Click="Paste_Click" x:Name="PasteMenuItem"/>
                 </MenuItem>
-                <MenuItem Header="Actions">
+                <MenuItem Header="Actions" x:Name="ActionsMenu">
                     <MenuItem Header="Add Row" Click="AddRow_Click" x:Name="AddRowMenuItem"/>
                     <MenuItem Header="Clear Data" Click="Clear_Click" x:Name="ClearMenuItem"/>
                     <MenuItem Header="Generate Chart" Click="Generate_Chart_Click" x:Name="GenerateMenuItem"/>
                 </MenuItem>
-                <MenuItem Header="View">
-                    <MenuItem Header="Chart" Click="Chart_Click" x:Name="ChartMenuItem" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="View" x:Name="ViewMenu">
                     <MenuItem Header="Input Data" Click="InputData_Click" x:Name="InputDataMenuItem" IsCheckable="True" IsChecked="True"/>
                     <MenuItem Header="Transformed Data" Click="TransformedData_Click" x:Name="TransformedDataMenuItem" IsCheckable="True" IsChecked="True"/>
                 </MenuItem>
-                <MenuItem Header="Help">
+                <MenuItem Header="Help" x:Name="HelpMenu">
                     <MenuItem Header="Help" Click="Help_Click" x:Name="HelpMenuItem"/>
                     <Separator x:Name="SeparatorOneMenuItemHelp"/>
                     <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
