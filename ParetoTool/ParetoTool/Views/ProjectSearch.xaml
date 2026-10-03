@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParetoTool.Views"
         mc:Ignorable="d"
-        Title="Search for Project" Height="418" Width="615">
-    <Grid Margin="0,0,0,79">
+        Title="Search for Project" Height="410" Width="615">
+    <Grid Margin="0,0,0,51">
         <Grid.RowDefinitions>
             <RowDefinition Height="61"/>
-            <RowDefinition Height="206*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="167*"/>
+            <RowDefinition Height="176*"/>
+            <RowDefinition Height="Auto" MinHeight="23"/>
+            <RowDefinition Height="91*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,30">
             <Label Content="Search:" VerticalAlignment="Center"/>
@@ -24,7 +24,7 @@
             <Button Content="Clear" Width="75" Height="26" Click="ClearButton_Click" VerticalContentAlignment="Center"/>
         </StackPanel>
         <CheckBox Content="Match Case" Grid.Row="0" Margin="55,40,0,0"/>
-        <GroupBox Header="Search Results" Grid.Row="1" Margin="10,5,10,10">
+        <GroupBox Header="{Binding SearchResultsCount}" Grid.Row="1" Margin="10,5,10,10">
             <ListView x:Name="SearchResultsListView" Margin="5,5,5,2">
                 <ListView.View>
                     <GridView>
@@ -34,10 +34,10 @@
                 </ListView.View>
             </ListView>
         </GroupBox>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,41" Grid.RowSpan="2">
-            <Button Content="Open Project" x:Name="OpenProjectButton" Height="32"></Button>
-            <Button Content="Close" Click="CloseButton_Click" Margin="530,18,10,124" Grid.RowSpan="2" x:Name="CloseButton"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,8,10,41" HorizontalAlignment="Right" Width="218">
+            <Button Content="Open Project" x:Name="OpenProjectButton" Height="32" Width="100" Margin="0,0,15,0"></Button>
+            <Button Content="Close" Click="CloseButton_Click" Margin="0,0,5,0" Height="32" Width="100" x:Name="CloseButton"/>
         </StackPanel>
-        
+
     </Grid>
 </Window>
