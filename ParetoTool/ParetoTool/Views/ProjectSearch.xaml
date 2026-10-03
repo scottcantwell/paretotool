@@ -5,27 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ParetoTool.Views"
         mc:Ignorable="d"
-        Title="Search for Project" Height="450" Width="615">
-    <Grid>
+        Title="Search for Project" Height="418" Width="615">
+    <Grid Margin="0,0,0,79">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="61"/>
+            <RowDefinition Height="206*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="167*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,65">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,5,5,30">
             <Label Content="Search:" VerticalAlignment="Center"/>
             <TextBox x:Name="SearchTextBox" Width="295" Margin="0,0,5,0" Height="25"/>
             <ComboBox Height="25" Width="100" Margin="0,0,5,0" x:Name="SearchCriteriaComboBox">
                 <ComboBoxItem Content="Project Name" IsSelected="True"/>
-                <ComboBoxItem Content="Tag(s)"/>   
+                <ComboBoxItem Content="Tag(s)"/>
             </ComboBox>
-            <Button Content="Search" Width="75" Height="25" Click="SearchButton_Click"/>
-            <Button Content="Clear" Width="75" Height="25" Click="ClearButton_Click"/>
+            <Button Content="Search" Width="75" Height="26" Click="SearchButton_Click" VerticalContentAlignment="Center"/>
+            <Button Content="Clear" Width="75" Height="26" Click="ClearButton_Click" VerticalContentAlignment="Center"/>
         </StackPanel>
+        <CheckBox Content="Match Case" Grid.Row="0" Margin="55,40,0,0"/>
         <GroupBox Header="Search Results" Grid.Row="1" Margin="10,5,10,10">
-            <ListBox x:Name="ResultsListBox" Margin="5"/>
+            <ListView x:Name="SearchResultsListView" Margin="5,5,5,2">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Project Name" DisplayMemberBinding="{Binding ProjectName}" Width="200" x:Name="ProjectNameColumn"/>
+                        <GridViewColumn Header="Path" DisplayMemberBinding="{Binding Path}" Width="250" x:Name="PathColumn"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </GroupBox>
-        <Button Content="Close" Grid.Row="2" Width="75" Height="25" Click="CloseButton_Click" Margin="0,30,24,142" Grid.RowSpan="3"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,41" Grid.RowSpan="2">
+            <Button Content="Open Project" x:Name="OpenProjectButton" Height="32"></Button>
+            <Button Content="Close" Click="CloseButton_Click" Margin="530,18,10,124" Grid.RowSpan="2" x:Name="CloseButton"/>
+        </StackPanel>
+        
     </Grid>
 </Window>
