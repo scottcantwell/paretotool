@@ -88,11 +88,10 @@
 
     <DockPanel>
         <Border DockPanel.Dock="Bottom" Background="#F9F9F9" BorderBrush="#F0F0F0" BorderThickness="0,1,0,0" Height="45">
-            <TextBlock Text="July 2026 Feature Update"
-                       Margin="20,0,0,0"
-                       VerticalAlignment="Center"
-                       Foreground="#1B1B1B"
-                       FontSize="12"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="Release Notes" FontSize="12" Foreground="#1A1A1A" Margin="12,0,0,0" VerticalAlignment="Center" FontStyle="Italic" FontWeight="Bold"/>
+                <Button Content="Continue" Margin="700,0,0,0" Foreground="Black" Background="LightGray" Visibility="Visible" x:Name="ContinueButton" Click="ContinueButton_Click"/>
+         </StackPanel>
         </Border>
 
         <Grid>

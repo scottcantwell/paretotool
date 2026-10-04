@@ -331,4 +331,15 @@ public partial class StartWindow : Window
     {
 
     }
+
+    private void ContinueButton_Click(object sender, RoutedEventArgs e)
+    {
+
+        Close();
+
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+
+
+    }
 }
