@@ -46,11 +46,11 @@ public partial class StartWindow : Window
             .GroupBy(item =>
             {
                 DateTime dt;
-                return DateTime.TryParse(item.When, out dt) ? dt.ToString("MMMM yyyy") : item.When;
+                return DateTime.TryParse(item.LastAccessed, out dt) ? dt.ToString("MMMM yyyy") : item.LastAccessed;
             })
             .Select(group => new RecentGroup(group.Key, group.Select(item =>
-                // keep storing the original string in RecentItem.When (signature says it's a string)
-                new RecentItem(item.Name, item.Path, item.When, FolderIcon(), bool.TryParse(item.Pinned, out var isPinned) && isPinned)).ToList()))
+                // keep storing the original string in RecentItem.LastAccessed (signature says it's a string)
+                new RecentItem(item.Name, item.Path, item.LastAccessed, FolderIcon(), bool.TryParse(item.Pinned, out var isPinned) && isPinned)).ToList()))
             .ToList();
 
         foreach (var group in groupedItems)
@@ -65,27 +65,27 @@ public partial class StartWindow : Window
             if (pinnedGroup.Items.Count > 0)
                 _all.Add(pinnedGroup);
 
-            todayGroup = new RecentGroup("Today", group.Items.Except(pinnedGroup.Items).Where(x => DateTime.TryParse(x.When, out var dt)
+            todayGroup = new RecentGroup("Today", group.Items.Except(pinnedGroup.Items).Where(x => DateTime.TryParse(x.LastAccessed, out var dt)
                                                                                                    && dt.Day == DateTime.Now.Day).ToList());
             if (todayGroup.Items.Count > 0)
                 _all.Add(todayGroup);
 
-            yesterdayGroup = new RecentGroup("Yesterday", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Where(x => DateTime.TryParse(x.When, out var dt)
+            yesterdayGroup = new RecentGroup("Yesterday", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Where(x => DateTime.TryParse(x.LastAccessed, out var dt)
                                                                                                                                     && dt.Date == DateTime.Now.Date.AddDays(-1)).ToList());
             if (yesterdayGroup.Items.Count > 0)
                 _all.Add(yesterdayGroup);
 
-            thisWeekGroup = new RecentGroup("This week", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Where(x => DateTime.TryParse(x.When, out var dt) 
+            thisWeekGroup = new RecentGroup("This week", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Where(x => DateTime.TryParse(x.LastAccessed, out var dt) 
                                                                                                                                                      && dt >= DateTime.Now.AddDays(-7)).ToList());
             if (thisWeekGroup.Items.Count > 0)
                 _all.Add(thisWeekGroup);
 
-            thisMonthGroup = new RecentGroup("This month", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt)
+            thisMonthGroup = new RecentGroup("This month", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).ToList().Where(x => DateTime.TryParse(x.LastAccessed, out var dt)
                                                                                                                                                                                             && dt.Month == DateTime.Now.Month && dt.Year == DateTime.Now.Year).ToList());
             if (thisMonthGroup.Items.Count > 0)
                 _all.Add(thisMonthGroup);
 
-            olderGroup = new RecentGroup("Older", group.Items.Except(pinnedGroup.Items).Except( todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt < DateTime.Now.AddMonths(-1)).ToList());
+            olderGroup = new RecentGroup("Older", group.Items.Except(pinnedGroup.Items).Except( todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.LastAccessed, out var dt) && dt < DateTime.Now.AddMonths(-1)).ToList());
 
             if (olderGroup.Items.Count > 0)
                 _all.Add(olderGroup);
@@ -94,8 +94,8 @@ public partial class StartWindow : Window
 
     }
 
-    private static RecentItem Item(string name, string path, string when, object icon, bool isPinned) =>
-        new(name, path, when, icon, isPinned);
+    private static RecentItem Item(string name, string path, string lastAccessed, object icon, bool isPinned) =>
+        new(name, path, lastAccessed, icon, isPinned);
 
     private static object SolutionIcon()
     {

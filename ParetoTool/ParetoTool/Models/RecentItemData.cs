@@ -12,27 +12,26 @@ public sealed class RecentItemData
     /// Gets or sets the name of the recent item.
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the path of the recent item.
     /// </summary>
     [JsonProperty("path")]
-    public string Path { get; set; }
-
+    public string Path { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the time when the recent item was accessed.
     /// </summary>
-    [JsonProperty("when")]
-    public string When { get; set; }
+    [JsonProperty("lastaccessed")]
+    public string LastAccessed { get; set; } = string.Empty;
 
 
     /// <summary>
     /// Get or sets the pinned status of the recent item.
     /// </summary>
     [JsonProperty("pinned")]
-    public string Pinned { get; set; }
+    public string Pinned { get; set; } = string.Empty;
 
     /// <summary>
     /// Returns a string representation of the recent item.

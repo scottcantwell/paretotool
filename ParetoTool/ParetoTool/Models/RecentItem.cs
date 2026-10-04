@@ -9,7 +9,7 @@ public sealed class RecentItem
     {
         Name = name;
         Path = path;
-        When = when;
+        LastAccessed = when;
         Icon = icon;
         IsPinned = isPinned;
     }
@@ -27,7 +27,7 @@ public sealed class RecentItem
     /// <summary>
     /// Gets the time when the recent item was accessed.
     /// </summary>
-    public string When { get; }
+    public string LastAccessed { get; }
 
     /// <summary>
     /// Gets the icon associated with the recent item.
