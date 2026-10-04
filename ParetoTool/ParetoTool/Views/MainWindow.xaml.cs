@@ -468,4 +468,19 @@ public partial class MainWindow : Window
 
 
     }
+
+    private void ReportBug_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ReleaseNotes_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CheckForUpdates_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }

@@ -51,7 +51,11 @@
                 </MenuItem>
                 <MenuItem Header="Help" x:Name="HelpMenu">
                     <MenuItem Header="Help" Click="Help_Click" x:Name="HelpMenuItem"/>
-                    <Separator x:Name="SeparatorOneMenuItemHelp"/>
+                    <MenuItem Header="Check for Updates" Click="CheckForUpdates_Click" x:Name="CheckForUpdatesMenuItem"/>
+                    <MenuItem Header="Release Notes " Click="ReleaseNotes_Click" x:Name="ReleaseNotesMenuItem"/>   
+                    <Separator x:Name="SeparatorOneMenuItemHelp"/>  
+                    <MenuItem Header="Report a Bug" Click="ReportBug_Click" x:Name="ReportBugMenuItem"/>         
+                    <Separator x:Name="SeparatorTwoMenuItemHelp"/>
                     <MenuItem Header="About" Click="About_Click" x:Name="AboutMenuItem"/>
                 </MenuItem>
             </Menu>
