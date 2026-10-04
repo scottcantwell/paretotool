@@ -58,6 +58,7 @@ public class RecentItems
        
         try
         {
+
             if (!System.IO.File.Exists(path))
             {
                 throw new FileNotFoundException($"Recent items file not found: {path}");

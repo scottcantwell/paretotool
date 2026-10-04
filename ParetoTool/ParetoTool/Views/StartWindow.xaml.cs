@@ -28,6 +28,16 @@ public partial class StartWindow : Window
 
         RecentItems recentItems = new RecentItems(Enumerable.Empty<RecentItemData>());
 
+        var todayGroup = new RecentGroup("Today", new List<RecentItem>());
+
+        var yesterdayGroup = new RecentGroup("Yesterday", new List<RecentItem>());  
+
+        var thisWeekGroup = new RecentGroup("This week", new List<RecentItem>());
+
+        var thisMonthGroup = new RecentGroup("This month", new List<RecentItem>());
+
+        var olderGroup = new RecentGroup("Older", new List<RecentItem>());
+
         recentItems.LoadItems("C:\\Users\\scant\\Downloads\\recent (3).json");  
 
         var groupedItems = recentItems.Items
@@ -40,27 +50,36 @@ public partial class StartWindow : Window
                 new RecentItem(item.Name, item.Path, item.When, FolderIcon())).ToList()))
             .ToList();
 
-        foreach (var group in groupedItems)
+       foreach (var group in groupedItems)
         {
+         
             var item = group.Items.FirstOrDefault();
+          
             if (item == null)
                 continue;
 
-            if (!DateTime.TryParse(item.When, out var itemWhen))
-                itemWhen = DateTime.MinValue; // or skip this item
+                todayGroup = new RecentGroup("Today", group.Items.Where(x=>DateTime.TryParse(x.When, out var dt) && dt.Day == DateTime.Now.Day).ToList()); 
+                if (todayGroup.Items.Count > 0)
+                _all.Add(todayGroup);
+            
+                yesterdayGroup = new RecentGroup("Yesterday", group.Items.Except(todayGroup.Items).ToList().Where(x=>DateTime.TryParse(x.When, out var dt) && dt.Date == DateTime.Now.Date.AddDays(-1)).ToList());
+                if (yesterdayGroup.Items.Count > 0)
+                _all.Add(yesterdayGroup);
+            
+                thisWeekGroup = new RecentGroup("This week", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt >= DateTime.Now.AddDays(-7)).ToList());
+                if (thisWeekGroup.Items.Count > 0)
+                _all.Add(thisWeekGroup);
+                  
+                thisMonthGroup = new RecentGroup("This month", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt)
+                && dt.Month == DateTime.Now.Month && dt.Year == DateTime.Now.Year).ToList());
+                if (thisMonthGroup.Items.Count > 0)
+                _all.Add(thisMonthGroup);
+       
+                olderGroup = new RecentGroup("Older", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt<DateTime.Now.AddMonths(-1)).ToList());
 
-            if (itemWhen.Month == DateTime.Now.Month && itemWhen.Year == DateTime.Now.Year)
-            {
-                _all.Add(new RecentGroup("This month", group.Items));
-            }
-            else if (itemWhen >= DateTime.Now.AddDays(-7))
-            {
-                        _all.Add(new RecentGroup("This week", group.Items));
-            }
-            else
-            {
-                _all.Add(new RecentGroup("Older", group.Items));
-            }
+                if (olderGroup.Items.Count > 0)
+                _all.Add(olderGroup);
+            
         }   
 
 
