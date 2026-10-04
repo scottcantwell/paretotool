@@ -5,12 +5,13 @@
 /// </summary>
 public sealed class RecentItem
 {
-    public RecentItem(string name, string path, string when, object icon)
+    public RecentItem(string name, string path, string when, object icon, bool isPinned)
     {
         Name = name;
         Path = path;
         When = when;
         Icon = icon;
+        IsPinned = isPinned;
     }
 
     /// <summary>
@@ -29,9 +30,11 @@ public sealed class RecentItem
     public string When { get; }
 
     /// <summary>
-    /// 
+    /// Gets the icon associated with the recent item.
     /// </summary>
     public object Icon { get; }
+
+    public bool IsPinned { get; }
 
     public override string ToString()
     {

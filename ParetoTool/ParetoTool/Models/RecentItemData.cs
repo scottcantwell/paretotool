@@ -16,6 +16,9 @@ public sealed class RecentItemData
     [JsonProperty("when")]
     public string When { get; set; }
 
+    [JsonProperty("pinned")]
+    public string Pinned { get; set; }
+
     public override string ToString()
     {
         return $"{Name} ({Path})";

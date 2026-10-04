@@ -30,7 +30,7 @@ public partial class StartWindow : Window
 
         var todayGroup = new RecentGroup("Today", new List<RecentItem>());
 
-        var yesterdayGroup = new RecentGroup("Yesterday", new List<RecentItem>());  
+        var yesterdayGroup = new RecentGroup("Yesterday", new List<RecentItem>());
 
         var thisWeekGroup = new RecentGroup("This week", new List<RecentItem>());
 
@@ -38,72 +38,55 @@ public partial class StartWindow : Window
 
         var olderGroup = new RecentGroup("Older", new List<RecentItem>());
 
-        recentItems.LoadItems("C:\\Users\\scant\\Downloads\\recent (3).json");  
+        recentItems.LoadItems("C:\\Users\\scant\\Downloads\\recent (3).json");
 
         var groupedItems = recentItems.Items
-            .GroupBy(item => {
+            .GroupBy(item =>
+            {
                 DateTime dt;
                 return DateTime.TryParse(item.When, out dt) ? dt.ToString("MMMM yyyy") : item.When;
             })
             .Select(group => new RecentGroup(group.Key, group.Select(item =>
                 // keep storing the original string in RecentItem.When (signature says it's a string)
-                new RecentItem(item.Name, item.Path, item.When, FolderIcon())).ToList()))
+                new RecentItem(item.Name, item.Path, item.When, FolderIcon(), bool.TryParse(item.Pinned, out var isPinned) && isPinned)).ToList()))
             .ToList();
 
-       foreach (var group in groupedItems)
+        foreach (var group in groupedItems)
         {
-         
+
             var item = group.Items.FirstOrDefault();
-          
+
             if (item == null)
                 continue;
 
-                todayGroup = new RecentGroup("Today", group.Items.Where(x=>DateTime.TryParse(x.When, out var dt) && dt.Day == DateTime.Now.Day).ToList()); 
-                if (todayGroup.Items.Count > 0)
+            todayGroup = new RecentGroup("Today", group.Items.Where(x => DateTime.TryParse(x.When, out var dt) && dt.Day == DateTime.Now.Day).ToList());
+            if (todayGroup.Items.Count > 0)
                 _all.Add(todayGroup);
-            
-                yesterdayGroup = new RecentGroup("Yesterday", group.Items.Except(todayGroup.Items).ToList().Where(x=>DateTime.TryParse(x.When, out var dt) && dt.Date == DateTime.Now.Date.AddDays(-1)).ToList());
-                if (yesterdayGroup.Items.Count > 0)
+
+            yesterdayGroup = new RecentGroup("Yesterday", group.Items.Except(todayGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt.Date == DateTime.Now.Date.AddDays(-1)).ToList());
+            if (yesterdayGroup.Items.Count > 0)
                 _all.Add(yesterdayGroup);
-            
-                thisWeekGroup = new RecentGroup("This week", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt >= DateTime.Now.AddDays(-7)).ToList());
-                if (thisWeekGroup.Items.Count > 0)
+
+            thisWeekGroup = new RecentGroup("This week", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt >= DateTime.Now.AddDays(-7)).ToList());
+            if (thisWeekGroup.Items.Count > 0)
                 _all.Add(thisWeekGroup);
-                  
-                thisMonthGroup = new RecentGroup("This month", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt)
-                && dt.Month == DateTime.Now.Month && dt.Year == DateTime.Now.Year).ToList());
-                if (thisMonthGroup.Items.Count > 0)
+
+            thisMonthGroup = new RecentGroup("This month", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt)
+            && dt.Month == DateTime.Now.Month && dt.Year == DateTime.Now.Year).ToList());
+            if (thisMonthGroup.Items.Count > 0)
                 _all.Add(thisMonthGroup);
-       
-                olderGroup = new RecentGroup("Older", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt<DateTime.Now.AddMonths(-1)).ToList());
 
-                if (olderGroup.Items.Count > 0)
+            olderGroup = new RecentGroup("Older", group.Items.Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.When, out var dt) && dt < DateTime.Now.AddMonths(-1)).ToList());
+
+            if (olderGroup.Items.Count > 0)
                 _all.Add(olderGroup);
-            
-        }   
 
+        }
 
-
-        //_all.Add(new RecentGroup("This week", new[]
-        //{
-        //    Item("ParetoTool.slnx", @"C:\Users\scant\source\repos\scottcantwell\paretotool\ParetoTool", "9/29/2026 7:27 PM", SolutionIcon()),
-        //}));
-
-        //_all.Add(new RecentGroup("This month", new[]
-        //{
-        //    Item("queryforge.slnx", @"C:\Users\scant\source\repos\scottcantwell\queryforge", "9/21/2026 10:55 AM", SolutionIcon()),
-        //    Item("queryforge", @"C:\Users\scant\source\repos\scottcantwell", "9/13/2026 9:43 AM", FolderIcon()),
-        //    Item("paretotool", @"C:\Users\scant\source\repos\scottcantwell", "9/8/2026 7:35 PM", FolderIcon()),
-        //    Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\scottcantwell\GitHubMonitor\src", "9/7/2026 12:10 PM", SolutionIcon()),
-        //    Item("GitHubMonitor", @"C:\Users\scant\source\repos\scottcantwell", "9/6/2026 8:06 PM", FolderIcon()),
-        //    Item("GithubMonitor.csproj", @"C:\Users\scant\source\repos\GitHubMonitor\src\GithubMonitor", "9/6/2026 7:42 PM", ProjectIcon()),
-        //    Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\GitHubMonitor\src", "9/6/2026 7:42 PM", SolutionIcon()),
-        //    Item("GitHubMonitor", @"C:\Users\scant\source\repos", "9/6/2026 7:30 PM", FolderIcon()),
-        //}));
     }
 
-    private static RecentItem Item(string name, string path, string when, object icon) =>
-        new(name, path, when, icon);
+    private static RecentItem Item(string name, string path, string when, object icon, bool isPinned) =>
+        new(name, path, when, icon, isPinned);
 
     private static object SolutionIcon()
     {
