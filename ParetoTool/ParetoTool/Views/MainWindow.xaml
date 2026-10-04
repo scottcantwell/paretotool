@@ -24,6 +24,7 @@
                     <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
                     <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
                     <MenuItem Header="Edit Project" Click="EditProject_Click" x:Name="EditProjectMenuItem"/>
+                    <MenuItem Header="Start Window" Click="StartWindow_Click" x:Name="StartWindowMenuItem"/>
                     <Separator></Separator>
                     <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem"/>
                     <MenuItem Header="Save Project As..." Click="SaveProjectAs_Click" x:Name="SaveProjectAsMenuItem"/>

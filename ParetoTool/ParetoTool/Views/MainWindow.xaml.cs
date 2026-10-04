@@ -459,4 +459,13 @@ public partial class MainWindow : Window
 
 
     }
+
+    private void StartWindow_Click(object sender, RoutedEventArgs e)
+    {
+
+        StartWindow startWindow = new StartWindow() { Owner = this };
+        startWindow.Show(); 
+
+
+    }
 }
