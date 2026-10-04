@@ -103,8 +103,8 @@
 
             <Grid Grid.Row="0" Background="White">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Button Style="{StaticResource CaptionButton}" Content="&#xE922;" Click="Maximize_Click"/>
-                    <Button Style="{StaticResource CaptionButton}" Tag="Close" Content="&#xE8BB;" Click="Close_Click"/>
+                    <Button Style="{StaticResource CaptionButton}" Content="&#xE922;" Click="Maximize_Click" x:Name="MaximizeButton"/>
+                    <Button Style="{StaticResource CaptionButton}" Tag="Close" Content="&#xE8BB;" Click="Close_Click" x:Name="CloseButton"/>
                 </StackPanel>
             </Grid>
 

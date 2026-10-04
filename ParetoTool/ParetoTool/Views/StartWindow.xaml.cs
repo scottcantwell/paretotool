@@ -295,10 +295,15 @@ public partial class StartWindow : Window
     private void Maximize_Click(object sender, RoutedEventArgs e)
     {
 
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; 
+        MaximizeButton.Content = WindowState == WindowState.Maximized ? "&#xE923;" : "&#xE922;";
+
     }
 
     private void Close_Click(object sender, RoutedEventArgs e)
     {
+
+        Close();
 
     }
 
