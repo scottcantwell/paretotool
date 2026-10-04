@@ -1,9 +1,10 @@
 ﻿using ParetoTool.Models;
-using System.Collections.ObjectModel;
+using ParetoTool.Views;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace ParetoTool.Views;
@@ -126,44 +127,128 @@ public partial class StartWindow : Window
             .ToList();
     }
 
-    private void SearchBox_Focus(object sender, RoutedEventArgs e) => SearchBox.Focus();
+    private void GroupHeader_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button button || button.DataContext is not RecentGroup group)
+            return;
+        if (VisualTreeHelper.GetParent(button) is not Panel panel)
+            return;
+
+        var items = panel.Children.OfType<ItemsControl>().FirstOrDefault();
+        var chevron = FindChevron(button);
+        if (items == null)
+            return;
+
+        var expanding = !group.IsExpanded;
+        group.IsExpanded = expanding;
+        AnimateSection(items, expanding);
+        AnimateChevron(chevron, expanding);
+    }
+
+    private static void AnimateChevron(System.Windows.Shapes.Path? chevron, bool expanding)
+    {
+        if (chevron == null)
+            return;
+
+        var rotate = chevron.RenderTransform as RotateTransform;
+        if (rotate == null || rotate.IsFrozen)
+        {
+            rotate = new RotateTransform(rotate?.Angle ?? (expanding ? 0 : 90));
+            chevron.RenderTransform = rotate;
+        }
+
+        rotate.BeginAnimation(RotateTransform.AngleProperty,
+            new DoubleAnimation(expanding ? 90 : 0, TimeSpan.FromMilliseconds(180))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
+            });
+    }
+
+    private static System.Windows.Shapes.Path? FindChevron(DependencyObject root)
+    {
+        for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
+        {
+            var child = VisualTreeHelper.GetChild(root, i);
+            if (child is System.Windows.Shapes.Path path && path.RenderTransform is RotateTransform)
+                return path;
+            var nested = FindChevron(child);
+            if (nested != null)
+                return nested;
+        }
+
+        return null;
+    }
+
+    private static void AnimateSection(FrameworkElement items, bool expanding)
+    {
+        items.BeginAnimation(FrameworkElement.HeightProperty, null);
+
+        if (expanding)
+        {
+            items.Visibility = Visibility.Visible;
+            items.Height = 0;
+            items.Measure(new Size(Math.Max(items.ActualWidth, 1), double.PositiveInfinity));
+            var target = items.DesiredSize.Height;
+            var anim = new DoubleAnimation(0, target, TimeSpan.FromMilliseconds(220))
+            {
+                EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+            };
+            anim.Completed += (_, _) => items.BeginAnimation(FrameworkElement.HeightProperty, null);
+            items.BeginAnimation(FrameworkElement.HeightProperty, anim);
+            return;
+        }
+
+        var from = items.ActualHeight;
+        if (from <= 0)
+        {
+            items.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        var collapse = new DoubleAnimation(from, 0, TimeSpan.FromMilliseconds(180))
+        {
+            EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+        };
+        collapse.Completed += (_, _) =>
+        {
+            items.Visibility = Visibility.Collapsed;
+            items.BeginAnimation(FrameworkElement.HeightProperty, null);
+        };
+        items.BeginAnimation(FrameworkElement.HeightProperty, collapse);
+    }
+
+    private void Maximize_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Close_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void OpenProject_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CreateProject_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void OpenFolder_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void SearchBox_Focus(object sender, RoutedEventArgs e)
+    {
+
+    }
 
     private void RecentItem_Click(object sender, MouseButtonEventArgs e)
     {
-        if (sender is FrameworkElement { DataContext: RecentItem item })
-            MessageBox.Show($"{item.Name}\n{item.Path}", "Open recent", MessageBoxButton.OK, MessageBoxImage.Information);
+
     }
-
-    private void CreateProject_Click(object sender, RoutedEventArgs e) =>
-        MessageBox.Show("Create a new project", TitleOr("Start page"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-    private void OpenProject_Click(object sender, RoutedEventArgs e) =>
-        MessageBox.Show("Open a project or solution", TitleOr("Start page"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-    private void OpenFolder_Click(object sender, RoutedEventArgs e) =>
-        MessageBox.Show("Open a folder", TitleOr("Start page"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-    private void CloneRepo_Click(object sender, RoutedEventArgs e) =>
-        MessageBox.Show("Clone a repository", TitleOr("Start page"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-    private static string TitleOr(string fallback) => fallback;
-
-    private void Minimize_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-
-    private void Maximize_Click(object sender, RoutedEventArgs e) =>
-        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-
-    private void Close_Click(object sender, RoutedEventArgs e) => Close();
-}
-
-public sealed class RecentGroup
-{
-    public RecentGroup(string heading, IEnumerable<RecentItem> items)
-    {
-        Heading = heading;
-        Items = new ObservableCollection<RecentItem>(items);
-    }
-
-    public string Heading { get; }
-    public ObservableCollection<RecentItem> Items { get; }
 }

@@ -103,7 +103,6 @@
 
             <Grid Grid.Row="0" Background="White">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Button Style="{StaticResource CaptionButton}" Content="&#xE921;" Click="Minimize_Click"/>
                     <Button Style="{StaticResource CaptionButton}" Content="&#xE922;" Click="Maximize_Click"/>
                     <Button Style="{StaticResource CaptionButton}" Tag="Close" Content="&#xE8BB;" Click="Close_Click"/>
                 </StackPanel>
@@ -166,11 +165,29 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="0,6,12,2">
-                                        <StackPanel Orientation="Horizontal" Margin="2,4,0,6">
-                                            <Path Data="M1,1 L5,5 L1,9" Stroke="#444" StrokeThickness="1.1" Width="8" Height="8" Stretch="Uniform" VerticalAlignment="Center" Margin="0,1,6,0"/>
-                                            <TextBlock Text="{Binding Heading}" FontWeight="SemiBold" FontSize="12.5" Foreground="#1B1B1B"/>
-                                        </StackPanel>
-                                        <ItemsControl ItemsSource="{Binding Items}">
+                                        <Button Click="GroupHeader_Click" Cursor="Hand" Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Left" Padding="2,4,4,6">
+                                            <Button.Template>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border x:Name="Bd" Background="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="2">
+                                                        <ContentPresenter/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Bd" Property="Background" Value="#F6F6F6"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Path Data="M1,1 L5,5 L1,9" Stroke="#444" StrokeThickness="1.1" Width="8" Height="8" Stretch="Uniform" VerticalAlignment="Center" Margin="0,1,6,0" RenderTransformOrigin="0.5,0.5">
+                                                    <Path.RenderTransform>
+                                                        <RotateTransform Angle="90"/>
+                                                    </Path.RenderTransform>
+                                                </Path>
+                                                <TextBlock Text="{Binding Heading}" FontWeight="SemiBold" FontSize="12.5" Foreground="#1B1B1B"/>
+                                            </StackPanel>
+                                        </Button>
+                                        <ItemsControl ItemsSource="{Binding Items}" VerticalAlignment="Top" ClipToBounds="True">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border Padding="22,3,4,5" Cursor="Hand" MouseLeftButtonUp="RecentItem_Click" Background="Transparent">
@@ -235,17 +252,6 @@
                                 <Path Fill="#3A7BD5" Data="M10.2,8.2 A2.4,2.4 0 1 1 12.8,11.6 L14.4,13.2 L13.4,14.2 L11.8,12.6 A2.4,2.4 0 0 1 10.2,8.2 Z" StrokeThickness="0"/>
                             </Grid>
                             <TextBlock Text="Open a folder" FontSize="12.5" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Button>
-                    <Button Style="{StaticResource ActionButton}" Margin="0,6,0,0" Click="CloneRepo_Click">
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Width="16" Height="16" Margin="0,0,8,0">
-                                <Ellipse Fill="#0078D4" Width="4.2" Height="4.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4.5,0.5,0,0"/>
-                                <Ellipse Fill="#0078D4" Width="4.2" Height="4.2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="4.5,0,0,0.5"/>
-                                <Ellipse Fill="#0078D4" Width="4.2" Height="4.2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0.4,0"/>
-                                <Path Stroke="#0078D4" StrokeThickness="1.15" Data="M6.6,4.6 V11.2 M6.6,6.2 C8.4,6.2 10.2,7.2 11.2,8"/>
-                            </Grid>
-                            <TextBlock Text="Clone a repository" FontSize="12.5" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
