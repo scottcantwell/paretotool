@@ -103,7 +103,7 @@ public partial class MainWindow : Window
             try
             {
                 string jsonContent = System.IO.File.ReadAllText(filePath);
-                Project? loadedProject = JSONUtil.DeserializeObject<Project>(jsonContent);
+                Project? loadedProject = JSONUtil.DeserializeObjectSingle<Project>(jsonContent);
                 if (loadedProject != null)
                 {
 

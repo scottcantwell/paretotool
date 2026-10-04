@@ -1,5 +1,4 @@
 ﻿using ParetoTool.Models;
-using ParetoTool.Views;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,29 +18,69 @@ public partial class StartWindow : Window
         FocusSearchCommand = new RelayCommand(() => SearchBox.Focus());
         InitializeComponent();
         DataContext = this;
-        LoadSample();
+        LoadData();
         RecentList.ItemsSource = _all;
         Loaded += (_, _) => SearchBox.Focus();
     }
 
-    private void LoadSample()
+    private void LoadData()
     {
-        _all.Add(new RecentGroup("This week", new[]
-        {
-            Item("ParetoTool.slnx", @"C:\Users\scant\source\repos\scottcantwell\paretotool\ParetoTool", "9/29/2026 7:27 PM", SolutionIcon()),
-        }));
 
-        _all.Add(new RecentGroup("This month", new[]
+        RecentItems recentItems = new RecentItems(Enumerable.Empty<RecentItemData>());
+
+        recentItems.LoadItems("C:\\Users\\scant\\Downloads\\recent (3).json");  
+
+        var groupedItems = recentItems.Items
+            .GroupBy(item => {
+                DateTime dt;
+                return DateTime.TryParse(item.When, out dt) ? dt.ToString("MMMM yyyy") : item.When;
+            })
+            .Select(group => new RecentGroup(group.Key, group.Select(item =>
+                // keep storing the original string in RecentItem.When (signature says it's a string)
+                new RecentItem(item.Name, item.Path, item.When, FolderIcon())).ToList()))
+            .ToList();
+
+        foreach (var group in groupedItems)
         {
-            Item("queryforge.slnx", @"C:\Users\scant\source\repos\scottcantwell\queryforge", "9/21/2026 10:55 AM", SolutionIcon()),
-            Item("queryforge", @"C:\Users\scant\source\repos\scottcantwell", "9/13/2026 9:43 AM", FolderIcon()),
-            Item("paretotool", @"C:\Users\scant\source\repos\scottcantwell", "9/8/2026 7:35 PM", FolderIcon()),
-            Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\scottcantwell\GitHubMonitor\src", "9/7/2026 12:10 PM", SolutionIcon()),
-            Item("GitHubMonitor", @"C:\Users\scant\source\repos\scottcantwell", "9/6/2026 8:06 PM", FolderIcon()),
-            Item("GithubMonitor.csproj", @"C:\Users\scant\source\repos\GitHubMonitor\src\GithubMonitor", "9/6/2026 7:42 PM", ProjectIcon()),
-            Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\GitHubMonitor\src", "9/6/2026 7:42 PM", SolutionIcon()),
-            Item("GitHubMonitor", @"C:\Users\scant\source\repos", "9/6/2026 7:30 PM", FolderIcon()),
-        }));
+            var item = group.Items.FirstOrDefault();
+            if (item == null)
+                continue;
+
+            if (!DateTime.TryParse(item.When, out var itemWhen))
+                itemWhen = DateTime.MinValue; // or skip this item
+
+            if (itemWhen.Month == DateTime.Now.Month && itemWhen.Year == DateTime.Now.Year)
+            {
+                _all.Add(new RecentGroup("This month", group.Items));
+            }
+            else if (itemWhen >= DateTime.Now.AddDays(-7))
+            {
+                        _all.Add(new RecentGroup("This week", group.Items));
+            }
+            else
+            {
+                _all.Add(new RecentGroup("Older", group.Items));
+            }
+        }   
+
+
+
+        //_all.Add(new RecentGroup("This week", new[]
+        //{
+        //    Item("ParetoTool.slnx", @"C:\Users\scant\source\repos\scottcantwell\paretotool\ParetoTool", "9/29/2026 7:27 PM", SolutionIcon()),
+        //}));
+
+        //_all.Add(new RecentGroup("This month", new[]
+        //{
+        //    Item("queryforge.slnx", @"C:\Users\scant\source\repos\scottcantwell\queryforge", "9/21/2026 10:55 AM", SolutionIcon()),
+        //    Item("queryforge", @"C:\Users\scant\source\repos\scottcantwell", "9/13/2026 9:43 AM", FolderIcon()),
+        //    Item("paretotool", @"C:\Users\scant\source\repos\scottcantwell", "9/8/2026 7:35 PM", FolderIcon()),
+        //    Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\scottcantwell\GitHubMonitor\src", "9/7/2026 12:10 PM", SolutionIcon()),
+        //    Item("GitHubMonitor", @"C:\Users\scant\source\repos\scottcantwell", "9/6/2026 8:06 PM", FolderIcon()),
+        //    Item("GithubMonitor.csproj", @"C:\Users\scant\source\repos\GitHubMonitor\src\GithubMonitor", "9/6/2026 7:42 PM", ProjectIcon()),
+        //    Item("GithubMonitor.slnx", @"C:\Users\scant\source\repos\GitHubMonitor\src", "9/6/2026 7:42 PM", SolutionIcon()),
+        //    Item("GitHubMonitor", @"C:\Users\scant\source\repos", "9/6/2026 7:30 PM", FolderIcon()),
+        //}));
     }
 
     private static RecentItem Item(string name, string path, string when, object icon) =>
@@ -52,13 +91,13 @@ public partial class StartWindow : Window
         var g = new Grid { Width = 16, Height = 16 };
         g.Children.Add(new Path
         {
-            Fill = new SolidColorBrush(Color.FromRgb(154, 42, 201)),
+            Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(154, 42, 201)),
             Data = Geometry.Parse("M2,1 H10.2 L14,4.8 V15 H2 Z"),
             Stretch = Stretch.Fill
         });
         g.Children.Add(new Path
         {
-            Fill = Brushes.White,
+            Fill = System.Windows.Media.Brushes.White,
             Data = Geometry.Parse("M10.2,1 V4.8 H14"),
             Stretch = Stretch.Fill,
             Margin = new Thickness(1)
@@ -71,13 +110,13 @@ public partial class StartWindow : Window
         var g = new Grid { Width = 16, Height = 16 };
         g.Children.Add(new Path
         {
-            Fill = new SolidColorBrush(Color.FromRgb(184, 126, 0)),
+            Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(184, 126, 0)),
             Data = Geometry.Parse("M1,3.4 H6.3 L7.6,4.8 H15 V13.4 H1 Z"),
             Stretch = Stretch.Fill
         });
         g.Children.Add(new Path
         {
-            Fill = new SolidColorBrush(Color.FromRgb(255, 205, 92)),
+            Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(255, 205, 92)),
             Data = Geometry.Parse("M1.4,6.2 H14.6 V12.8 H1.4 Z"),
             Stretch = Stretch.Fill
         });
@@ -87,19 +126,19 @@ public partial class StartWindow : Window
     private static object ProjectIcon()
     {
         var g = new Grid { Width = 16, Height = 16 };
-        g.Children.Add(new Rectangle
+        g.Children.Add(new System.Windows.Shapes.Rectangle
         {
             Width = 13,
             Height = 13,
             RadiusX = 1,
             RadiusY = 1,
-            Fill = new SolidColorBrush(Color.FromRgb(22, 140, 62)),
+            Fill = new SolidColorBrush(System.Windows.Media.Color.FromRgb(22, 140, 62)),
             HorizontalAlignment = HorizontalAlignment.Center,
             VerticalAlignment = VerticalAlignment.Center
         });
         g.Children.Add(new Path
         {
-            Stroke = Brushes.White,
+            Stroke = System.Windows.Media.Brushes.White,
             StrokeThickness = 1.1,
             Data = Geometry.Parse("M4,5 H12 M4,8 H12 M4,11 H12 M8,4 V12"),
             Stretch = Stretch.None,
@@ -145,7 +184,7 @@ public partial class StartWindow : Window
         AnimateChevron(chevron, expanding);
     }
 
-    private static void AnimateChevron(System.Windows.Shapes.Path? chevron, bool expanding)
+    private static void AnimateChevron(Path? chevron, bool expanding)
     {
         if (chevron == null)
             return;
@@ -164,7 +203,7 @@ public partial class StartWindow : Window
             });
     }
 
-    private static System.Windows.Shapes.Path? FindChevron(DependencyObject root)
+    private static Path? FindChevron(DependencyObject root)
     {
         for (var i = 0; i < VisualTreeHelper.GetChildrenCount(root); i++)
         {
@@ -186,22 +225,38 @@ public partial class StartWindow : Window
         if (expanding)
         {
             items.Visibility = Visibility.Visible;
-            items.Height = 0;
-            items.Measure(new Size(Math.Max(items.ActualWidth, 1), double.PositiveInfinity));
+            items.Height = double.NaN;
+            items.UpdateLayout();
+
+            var width = items.ActualWidth;
+            if (width <= 1 && items.Parent is FrameworkElement parent)
+                width = parent.ActualWidth;
+
+            items.Measure(new System.Windows.Size(Math.Max(width, 1), double.PositiveInfinity));
             var target = items.DesiredSize.Height;
-            var anim = new DoubleAnimation(0, target, TimeSpan.FromMilliseconds(220))
+            if (target <= 0)
+                target = items.ActualHeight;
+
+            items.Height = 0;
+            var anim = new DoubleAnimation(0, Math.Max(target, 0), TimeSpan.FromMilliseconds(220))
             {
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
             };
-            anim.Completed += (_, _) => items.BeginAnimation(FrameworkElement.HeightProperty, null);
+            anim.Completed += (_, _) =>
+            {
+                items.BeginAnimation(FrameworkElement.HeightProperty, null);
+                items.Height = double.NaN;
+            };
             items.BeginAnimation(FrameworkElement.HeightProperty, anim);
             return;
         }
 
+        items.Height = items.ActualHeight;
         var from = items.ActualHeight;
         if (from <= 0)
         {
             items.Visibility = Visibility.Collapsed;
+            items.Height = double.NaN;
             return;
         }
 
@@ -211,12 +266,13 @@ public partial class StartWindow : Window
         };
         collapse.Completed += (_, _) =>
         {
-            items.Visibility = Visibility.Collapsed;
             items.BeginAnimation(FrameworkElement.HeightProperty, null);
+            items.Height = 0;
+            items.Visibility = Visibility.Collapsed;
         };
         items.BeginAnimation(FrameworkElement.HeightProperty, collapse);
     }
-
+   
     private void Maximize_Click(object sender, RoutedEventArgs e)
     {
 

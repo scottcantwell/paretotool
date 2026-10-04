@@ -210,7 +210,7 @@ namespace ParetoTool.Models
 
             string json = System.IO.File.ReadAllText(filePath);
 
-            Project? loadedProject = JSONUtil.DeserializeObject<Project>(json); 
+            Project? loadedProject = JSONUtil.DeserializeObjectSingle<Project>(json); 
 
             if (loadedProject != null)
             {

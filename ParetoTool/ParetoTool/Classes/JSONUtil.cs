@@ -28,16 +28,25 @@ namespace ParetoTool.Classes
         /// <returns>An object of the specified type deserialized from the JSON string, or null if deserialization fails.</returns>
         public static T? DeserializeObject<T>(string json)
         {
+            return JsonConvert.DeserializeObject<T>(json);
+        }
 
+        public static List<T>? DeserializeList<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<List<T>>(json);
+        }   
+
+
+
+        public static T? DeserializeObjectSingle<T>(string json)
+        {
             var result = JsonConvert.DeserializeObject<T>(json);
-
             if (result == null)
             {
                 return default(T);
             }
-
             return result;
-        }   
+        }
 
     }
 }
