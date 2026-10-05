@@ -67,7 +67,7 @@
             <CheckBox x:Name="DatabaseInputCheckBox" Content="Database Input" IsChecked="{Binding IsDataSourceEnabled}" VerticalAlignment="Center" Margin="5,0,0,0"/>
         </StackPanel>
         <local1:TagEditorControl Grid.Row="2" Grid.Column="1" x:Name="TagEditor" Margin="5,6,14,9" Tags="{Binding Tags}" />
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,12,35">
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,43,12,35">
             <Button x:Name="SaveButton" Content="Save" Width="75" Height="30" Click="SaveProject_Click" IsEnabled="{Binding CanSave}"/>
             <Button x:Name="CloseButton" Content="Close" Width="75" Height="30" Click="Close_Click" Margin="5,0,0,0"/>
         </StackPanel>

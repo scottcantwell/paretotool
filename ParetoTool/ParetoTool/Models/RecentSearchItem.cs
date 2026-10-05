@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ParetoTool.Classes;
 
 namespace ParetoTool.Models
 {
@@ -8,7 +9,6 @@ namespace ParetoTool.Models
     /// </summary>
     public class RecentSearchItem
     {
-
 
         /// <summary>
         /// Gets or sets the search text of the recent search item.
@@ -32,6 +32,9 @@ namespace ParetoTool.Models
 
     }
 
+    /// <summary>
+    /// Represents a list of recent search items in the recent searches file.
+    /// </summary>
     public class RecentSearchItemDataList
     {
         [JsonProperty("recentsearches")]
@@ -83,6 +86,9 @@ namespace ParetoTool.Models
         public void Save(List<RecentSearchItemData> items)
         {
 
+            var json = JSONUtil.SerializeObject(this);
+
+            System.IO.File.WriteAllText("recentsearches.json", json);
 
 
         }
