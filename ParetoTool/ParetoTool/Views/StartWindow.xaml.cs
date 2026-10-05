@@ -13,6 +13,8 @@ public partial class StartWindow : Window
     private readonly List<RecentGroup> _all = new();
     public ICommand FocusSearchCommand { get; }
 
+
+    
     public StartWindow()
     {
         FocusSearchCommand = new RelayCommand(() => SearchBox.Focus());
@@ -332,6 +334,56 @@ public partial class StartWindow : Window
         MainWindow mainWindow = new MainWindow();
         mainWindow.Show();
 
+
+    }
+
+   
+
+    private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+
+        if (e.LeftButton == MouseButtonState.Released)
+        {
+
+            if (e.OriginalSource is TextBlock textBlock)
+            {
+
+                if (textBlock.Tag == null)
+                {
+                    return;
+                }
+
+                string? path = textBlock.Tag?.ToString();
+
+                bool isOpen = Application.Current.Windows
+                .OfType<MainWindow>()
+                .Any(w => w.IsLoaded);
+                
+                if (isOpen)
+                {
+
+                    MainWindow? mainWindow = Application.Current.Windows
+                    .OfType<MainWindow>()
+                    .FirstOrDefault();  
+                   
+                    if (mainWindow != null)
+                    {
+                        mainWindow.OpenProject(path);
+                        mainWindow.Activate();
+                    }
+
+
+                }
+                else
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    mainWindow.OpenProject(path);
+
+                }
+
+
+        }
 
     }
 }

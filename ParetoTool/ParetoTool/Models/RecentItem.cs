@@ -1,4 +1,6 @@
-﻿namespace ParetoTool.Models;
+﻿
+
+namespace ParetoTool.Models;
 
 /// <summary>
 /// Represents a recent item with its name, path, the time it was accessed, and an associated icon.
@@ -13,6 +15,11 @@ public sealed class RecentItem
         Icon = icon;
         IsPinned = isPinned;
     }
+
+    /// <summary>
+    /// Gets the complete path of the recent item by combining its path and name.
+    /// </summary>
+    public string CompletePath => System.IO.Path.Combine(Path, Name);
 
     /// <summary>
     /// Gets the name of the recent item.
@@ -37,8 +44,7 @@ public sealed class RecentItem
     public bool IsPinned { get; }
 
     public override string ToString()
-    {
-        
+    {   
         return Name;
 
     }
