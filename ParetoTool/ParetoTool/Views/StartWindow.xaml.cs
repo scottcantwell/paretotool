@@ -14,15 +14,16 @@ public partial class StartWindow : Window
     public ICommand FocusSearchCommand { get; }
 
 
-    
-    public StartWindow()
+    public StartWindow(bool showContinueButton = false)
     {
         FocusSearchCommand = new RelayCommand(() => SearchBox.Focus());
         InitializeComponent();
         DataContext = this;
         LoadData();
         RecentList.ItemsSource = _all;
-        Loaded += (_, _) => SearchBox.Focus();
+
+        ContinueButton.Visibility = showContinueButton ? Visibility.Visible : Visibility.Collapsed;
+
     }
 
     private void LoadData()
@@ -77,7 +78,7 @@ public partial class StartWindow : Window
             if (yesterdayGroup.Items.Count > 0)
                 _all.Add(yesterdayGroup);
 
-            thisWeekGroup = new RecentGroup("This week", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Where(x => DateTime.TryParse(x.LastAccessed, out var dt) 
+            thisWeekGroup = new RecentGroup("This week", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Where(x => DateTime.TryParse(x.LastAccessed, out var dt)
                                                                                                                                                      && dt >= DateTime.Now.AddDays(-7)).ToList());
             if (thisWeekGroup.Items.Count > 0)
                 _all.Add(thisWeekGroup);
@@ -87,7 +88,7 @@ public partial class StartWindow : Window
             if (thisMonthGroup.Items.Count > 0)
                 _all.Add(thisMonthGroup);
 
-            olderGroup = new RecentGroup("Older", group.Items.Except(pinnedGroup.Items).Except( todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.LastAccessed, out var dt) && dt < DateTime.Now.AddMonths(-1)).ToList());
+            olderGroup = new RecentGroup("Older", group.Items.Except(pinnedGroup.Items).Except(todayGroup.Items).Except(yesterdayGroup.Items).Except(thisWeekGroup.Items).Except(thisMonthGroup.Items).ToList().Where(x => DateTime.TryParse(x.LastAccessed, out var dt) && dt < DateTime.Now.AddMonths(-1)).ToList());
 
             if (olderGroup.Items.Count > 0)
                 _all.Add(olderGroup);
@@ -95,6 +96,8 @@ public partial class StartWindow : Window
         }
 
     }
+
+
 
     private static RecentItem Item(string name, string path, string lastAccessed, object icon, bool isPinned) =>
         new(name, path, lastAccessed, icon, isPinned);
@@ -285,11 +288,11 @@ public partial class StartWindow : Window
         };
         items.BeginAnimation(FrameworkElement.HeightProperty, collapse);
     }
-   
+
     private void Maximize_Click(object sender, RoutedEventArgs e)
     {
 
-        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized; 
+        WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         MaximizeButton.Content = WindowState == WindowState.Maximized ? "&#xE923;" : "&#xE922;";
 
     }
@@ -328,16 +331,14 @@ public partial class StartWindow : Window
 
     private void ContinueButton_Click(object sender, RoutedEventArgs e)
     {
-
-        Close();
-
         MainWindow mainWindow = new MainWindow();
         mainWindow.Show();
+        Close();
+
+     
 
 
     }
-
-   
 
     private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
@@ -358,14 +359,14 @@ public partial class StartWindow : Window
                 bool isOpen = Application.Current.Windows
                 .OfType<MainWindow>()
                 .Any(w => w.IsLoaded);
-                
+
                 if (isOpen)
                 {
 
                     MainWindow? mainWindow = Application.Current.Windows
                     .OfType<MainWindow>()
-                    .FirstOrDefault();  
-                   
+                    .FirstOrDefault();
+
                     if (mainWindow != null)
                     {
                         mainWindow.OpenProject(path);
@@ -383,7 +384,9 @@ public partial class StartWindow : Window
                 }
 
 
-        }
+            }
 
+        }
     }
+
 }

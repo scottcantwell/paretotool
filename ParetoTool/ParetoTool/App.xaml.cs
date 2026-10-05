@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using ParetoTool.Views;
 using System.Windows;
 
 namespace ParetoTool
@@ -9,6 +8,11 @@ namespace ParetoTool
     /// </summary>
     public partial class App : Application
     {
-    }
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var window = new StartWindow(true);
+            window.Show();
+        }
 
+    }
 }

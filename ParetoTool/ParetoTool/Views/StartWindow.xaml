@@ -11,6 +11,7 @@
         Foreground="#1E1E1E"
         UseLayoutRounding="True"
         SnapsToDevicePixels="True"
+        BorderThickness="1"
         TextOptions.TextFormattingMode="Display">
     <Window.InputBindings>
         <KeyBinding Key="S" Modifiers="Alt" Command="{Binding FocusSearchCommand}"/>
@@ -58,7 +59,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="ActionButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
