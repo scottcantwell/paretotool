@@ -486,4 +486,8 @@ public partial class MainWindow : Window
 
     }
 
+    private void Grid_Drop(object sender, DragEventArgs e)
+    {
+
+    }
 }

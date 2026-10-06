@@ -8,7 +8,7 @@
         Background="{StaticResource BgBrush}"
         FontFamily="Segoe UI" FontSize="13"
         Foreground="{StaticResource TextBrush}">
-    <Grid Margin="10">
+    <Grid Margin="10" AllowDrop="True" Drop="Grid_Drop">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="28"/>
             <RowDefinition/>
