@@ -53,7 +53,7 @@ public partial class StartWindow : Window
             })
             .Select(group => new RecentGroup(group.Key, group.Select(item =>
                 // keep storing the original string in RecentItem.LastAccessed (signature says it's a string)
-                new RecentItem(item.Name, item.Path, item.LastAccessed, FolderIcon(), bool.TryParse(item.Pinned, out var isPinned) && isPinned)).ToList()))
+                new RecentItem(item.Name, item.Path.Replace("/",@"\"), item.LastAccessed, FolderIcon(), item.Pinned)).ToList()))
             .ToList();
 
         foreach (var group in groupedItems)
@@ -402,11 +402,6 @@ public partial class StartWindow : Window
 
                 SelectedItemPath = textBlock.Tag?.ToString();
 
-                if (SelectedItemPath == null)
-                {
-                    return;
-                }
-
                 StartWindowContextMenu.Visibility = Visibility.Visible;
 
             }
@@ -431,6 +426,19 @@ public partial class StartWindow : Window
 
     private void PinItem_Click(object sender, RoutedEventArgs e)
     {
+
+        if (SelectedItemPath == null)
+        {
+            return;
+        }
+
+        var selectedItem = (from item in recentItems.Items
+                            where item.Path == SelectedItemPath
+                            select item).FirstOrDefault();
+        
+        var updatedItem = selectedItem.Pinned == true;
+
+        
 
         if (SelectedItemPath == null)
         {

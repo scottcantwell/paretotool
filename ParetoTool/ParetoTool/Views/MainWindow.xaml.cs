@@ -100,72 +100,77 @@ public partial class MainWindow : Window
         if (openFileDialog.ShowDialog() == true)
         {
             string filePath = openFileDialog.FileName;
-            try
-            {
-                string jsonContent = System.IO.File.ReadAllText(filePath);
-                Project? loadedProject = JSONUtil.DeserializeObjectSingle<Project>(jsonContent);
-                if (loadedProject != null)
-                {
-
-                    Title = $"ParetoTool - {loadedProject.Name}";
-                    
-                    Models.ParetoTool.AddProject(loadedProject);
-                    InputItems.Clear();
-                    ParetoRows.Clear();
-                    if (loadedProject.InputData is IInputData inputData)
-                    {
-
-                        if (inputData.DataSourceType == DataSource.Manual)
-                        {
-
-                            switch (inputData.DataSourceType)
-                            {
-                                case DataSource.File:
-                                   
-                                    break;
-
-                                case DataSource.Manual:
-                                  
-                                    var manualInputData = loadedProject.InputData as ManualInputData;   
-
-                                    if (manualInputData != null)
-                                    {
-
-                                        foreach (var item in manualInputData.Items)
-                                        {
-                                            InputItems.Add(item);
-                                        }
-
-                                    }
-
-                                    break;
-                                default:
-                                    // Handle other types or do nothing
-                                    break;
-                            }
-
-                        }
-
-                        //foreach (var item in inputData.Items)
-                        //{
-                        //    InputItems.Add(item);
-                        //}
-                    }
-                    GenerateChart();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to load the project. The file may be corrupted or in an invalid format.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred while loading the project: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            OpenProject(filePath);
         }
 
 
-    }   
+    }
+
+    public void OpenProject(string filePath)
+    {
+        try
+        {
+            string jsonContent = System.IO.File.ReadAllText(filePath);
+            Project? loadedProject = JSONUtil.DeserializeObjectSingle<Project>(jsonContent);
+            if (loadedProject != null)
+            {
+
+                Title = $"ParetoTool - {loadedProject.Name}";
+
+                Models.ParetoTool.AddProject(loadedProject);
+                InputItems.Clear();
+                ParetoRows.Clear();
+                if (loadedProject.InputData is IInputData inputData)
+                {
+
+                    if (inputData.DataSourceType == DataSource.Manual)
+                    {
+
+                        switch (inputData.DataSourceType)
+                        {
+                            case DataSource.File:
+
+                                break;
+
+                            case DataSource.Manual:
+
+                                var manualInputData = loadedProject.InputData as ManualInputData;
+
+                                if (manualInputData != null)
+                                {
+
+                                    foreach (var item in manualInputData.Items)
+                                    {
+                                        InputItems.Add(item);
+                                    }
+
+                                }
+
+                                break;
+                            default:
+                                // Handle other types or do nothing
+                                break;
+                        }
+
+                    }
+
+                    //foreach (var item in inputData.Items)
+                    //{
+                    //    InputItems.Add(item);
+                    //}
+                }
+                GenerateChart();
+            }
+            else
+            {
+                MessageBox.Show("Failed to load the project. The file may be corrupted or in an invalid format.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"An error occurred while loading the project: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
 
     private void Chart_Click(object sender, RoutedEventArgs e)
     {
@@ -484,8 +489,4 @@ public partial class MainWindow : Window
 
     }
 
-    internal void OpenProject(string? path)
-    {
-       
-    }
 }

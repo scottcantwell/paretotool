@@ -7,11 +7,11 @@ namespace ParetoTool.Models;
 /// </summary>
 public sealed class RecentItem
 {
-    public RecentItem(string name, string path, string when, object icon, bool isPinned)
+    public RecentItem(string name, string path, string lastAccessed, object icon, bool isPinned)
     {
         Name = name;
         Path = path;
-        LastAccessed = when;
+        LastAccessed = lastAccessed;
         Icon = icon;
         IsPinned = isPinned;
     }

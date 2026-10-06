@@ -31,7 +31,7 @@ public sealed class RecentItemData
     /// Get or sets the pinned status of the recent item.
     /// </summary>
     [JsonProperty("pinned")]
-    public string Pinned { get; set; } = string.Empty;
+    public bool Pinned { get; set; } = false;
 
     /// <summary>
     /// Returns a string representation of the recent item.
