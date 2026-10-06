@@ -422,7 +422,9 @@ public partial class StartWindow : Window
 
         recentItems.RemoveItem(selectedItem);
 
-        recentItems.SaveItems("");
+        string completepath = System.IO.Path.Combine(ParetoTool.Resources.Application.APP_FILES_PATH, ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
+
+        recentItems.SaveItems(Environment.ExpandEnvironmentVariables(completepath));
 
         //Refresh data
 
@@ -455,7 +457,7 @@ public partial class StartWindow : Window
 
         recentItems.AddItem(updatedItem);
 
-        recentItems.SaveItems("");
+        recentItems.SaveItems(ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
 
         //Refresh data
 
