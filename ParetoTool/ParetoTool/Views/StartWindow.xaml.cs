@@ -419,8 +419,12 @@ public partial class StartWindow : Window
         var selectedItem = (from item in recentItems.Items
                             where item.Path == SelectedItemPath
                             select item).FirstOrDefault();
-        
+
         recentItems.RemoveItem(selectedItem);
+
+        recentItems.SaveItems("");
+
+        //Refresh data
 
     }
 
@@ -435,15 +439,25 @@ public partial class StartWindow : Window
         var selectedItem = (from item in recentItems.Items
                             where item.Path == SelectedItemPath
                             select item).FirstOrDefault();
-        
-        var updatedItem = selectedItem.Pinned == true;
 
-        
-
-        if (SelectedItemPath == null)
+        if (selectedItem == null)
         {
+
             return;
+
         }
+
+        selectedItem.Pinned = true;
+
+        var updatedItem = selectedItem;
+
+        recentItems.RemoveItem(selectedItem);
+
+        recentItems.AddItem(updatedItem);
+
+        recentItems.SaveItems("");
+
+        //Refresh data
 
     }
 

@@ -458,10 +458,7 @@ public partial class MainWindow : Window
     {
 
         ProjectSearch projectSearchWindow = new ProjectSearch() { Owner = this };
-
         projectSearchWindow.Show();
-
-
 
     }
 
