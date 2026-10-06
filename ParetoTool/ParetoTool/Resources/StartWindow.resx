@@ -117,22 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="OlderGroupName" xml:space="preserve">
+  <data name="OLDER_GROUP_NAME" xml:space="preserve">
     <value>Older</value>
   </data>
-  <data name="PinnedGroupName" xml:space="preserve">
+  <data name="PINNED_GROUP_NAME" xml:space="preserve">
     <value>Pinned</value>
   </data>
-  <data name="ThisMonthGroupName" xml:space="preserve">
+  <data name="START_WINDOW_RECENT_ITEMS_FIELNAME" xml:space="preserve">
+    <value>RecentItems.json</value>
+  </data>
+  <data name="START_WINDOW_RECENT_SEARCHES_FILENAME" xml:space="preserve">
+    <value>RecentSearches.json</value>
+  </data>
+  <data name="START_WINDOW_DIRECTORY_NAME" xml:space="preserve">
+    <value>startwindow</value>
+  </data>
+  <data name="THIS_MONTH_GROUP_NAME" xml:space="preserve">
     <value>This Month</value>
   </data>
-  <data name="ThisWeekGroupName" xml:space="preserve">
+  <data name="THIS_WEEK_GROUP_NAME" xml:space="preserve">
     <value>This Week</value>
   </data>
-  <data name="TodayGroupName" xml:space="preserve">
+  <data name="TODAY_GROUP_NAME" xml:space="preserve">
     <value>Today</value>
   </data>
-  <data name="YesterdayGroupName" xml:space="preserve">
+  <data name="YESTERDAY_GROUP_NAME" xml:space="preserve">
     <value>Yesterday</value>
   </data>
 </root>

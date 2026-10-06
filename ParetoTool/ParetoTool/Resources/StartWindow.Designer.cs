@@ -63,54 +63,81 @@ namespace ParetoTool.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Older.
         /// </summary>
-        internal static string OlderGroupName {
+        internal static string OLDER_GROUP_NAME {
             get {
-                return ResourceManager.GetString("OlderGroupName", resourceCulture);
+                return ResourceManager.GetString("OLDER_GROUP_NAME", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pinned.
         /// </summary>
-        internal static string PinnedGroupName {
+        internal static string PINNED_GROUP_NAME {
             get {
-                return ResourceManager.GetString("PinnedGroupName", resourceCulture);
+                return ResourceManager.GetString("PINNED_GROUP_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to startwindow.
+        /// </summary>
+        internal static string START_WINDOW_DIRECTORY_NAME {
+            get {
+                return ResourceManager.GetString("START_WINDOW_DIRECTORY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RecentItems.json.
+        /// </summary>
+        internal static string START_WINDOW_RECENT_ITEMS_FIELNAME {
+            get {
+                return ResourceManager.GetString("START_WINDOW_RECENT_ITEMS_FIELNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RecentSearches.json.
+        /// </summary>
+        internal static string START_WINDOW_RECENT_SEARCHES_FILENAME {
+            get {
+                return ResourceManager.GetString("START_WINDOW_RECENT_SEARCHES_FILENAME", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This Month.
         /// </summary>
-        internal static string ThisMonthGroupName {
+        internal static string THIS_MONTH_GROUP_NAME {
             get {
-                return ResourceManager.GetString("ThisMonthGroupName", resourceCulture);
+                return ResourceManager.GetString("THIS_MONTH_GROUP_NAME", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This Week.
         /// </summary>
-        internal static string ThisWeekGroupName {
+        internal static string THIS_WEEK_GROUP_NAME {
             get {
-                return ResourceManager.GetString("ThisWeekGroupName", resourceCulture);
+                return ResourceManager.GetString("THIS_WEEK_GROUP_NAME", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Today.
         /// </summary>
-        internal static string TodayGroupName {
+        internal static string TODAY_GROUP_NAME {
             get {
-                return ResourceManager.GetString("TodayGroupName", resourceCulture);
+                return ResourceManager.GetString("TODAY_GROUP_NAME", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Yesterday.
         /// </summary>
-        internal static string YesterdayGroupName {
+        internal static string YESTERDAY_GROUP_NAME {
             get {
-                return ResourceManager.GetString("YesterdayGroupName", resourceCulture);
+                return ResourceManager.GetString("YESTERDAY_GROUP_NAME", resourceCulture);
             }
         }
     }
