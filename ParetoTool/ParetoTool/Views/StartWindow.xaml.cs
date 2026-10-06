@@ -12,7 +12,8 @@ public partial class StartWindow : Window
 {
     private readonly List<RecentGroup> _all = new();
     public ICommand FocusSearchCommand { get; }
-
+    public string SelectedItemPath { get; private set; }
+    private RecentItems recentItems = new RecentItems(Enumerable.Empty<RecentItemData>());
 
     public StartWindow(bool showContinueButton = false)
     {
@@ -29,8 +30,7 @@ public partial class StartWindow : Window
     private void LoadData()
     {
 
-        RecentItems recentItems = new RecentItems(Enumerable.Empty<RecentItemData>());
-
+        
         var todayGroup = new RecentGroup("Today", new List<RecentItem>());
 
         var yesterdayGroup = new RecentGroup("Yesterday", new List<RecentItem>());
@@ -387,4 +387,67 @@ public partial class StartWindow : Window
         }
     }
 
+    private void TextBlock_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
+
+        if (e.RightButton == MouseButtonState.Released)
+        {
+            if (e.OriginalSource is TextBlock textBlock)
+            {
+
+                if (textBlock.Tag == null)
+                {
+                    return;
+                }
+
+                SelectedItemPath = textBlock.Tag?.ToString();
+
+                if (SelectedItemPath == null)
+                {
+                    return;
+                }
+
+                StartWindowContextMenu.Visibility = Visibility.Visible;
+
+            }
+        }
+    }
+
+    private void RemoveItem_Click(object sender, RoutedEventArgs e)
+    {
+
+        if (SelectedItemPath == null)
+        {
+            return;
+        }
+
+        var selectedItem = (from item in recentItems.Items
+                            where item.Path == SelectedItemPath
+                            select item).FirstOrDefault();
+        
+        recentItems.RemoveItem(selectedItem);
+
+    }
+
+    private void PinItem_Click(object sender, RoutedEventArgs e)
+    {
+
+        if (SelectedItemPath == null)
+        {
+            return;
+        }
+
+    }
+
+    private void CopyPath_Click(object sender, RoutedEventArgs e)
+    {
+
+        if (SelectedItemPath == null)
+        {
+            return;
+        }
+
+        Clipboard.SetText(SelectedItemPath);
+
+    }
 }

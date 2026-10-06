@@ -486,6 +486,6 @@ public partial class MainWindow : Window
 
     internal void OpenProject(string? path)
     {
-        throw new NotImplementedException();
+       
     }
 }
