@@ -1,1 +1,1 @@
-# paretotool
+# Pareto Studio
