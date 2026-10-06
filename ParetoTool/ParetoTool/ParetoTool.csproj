@@ -17,4 +17,17 @@
   <ItemGroup>
     <Resource Include="images\paretotoollogo_large.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\StartWindow.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>StartWindow.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\StartWindow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>StartWindow.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

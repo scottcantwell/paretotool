@@ -20,7 +20,7 @@ namespace ParetoTool.Views;
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+    
         public string Heading { get; }
         public ObservableCollection<RecentItem> Items { get; }
 
