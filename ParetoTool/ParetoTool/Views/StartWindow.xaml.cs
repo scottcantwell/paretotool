@@ -14,6 +14,9 @@ public partial class StartWindow : Window
     public ICommand FocusSearchCommand { get; }
     public string SelectedItemPath { get; private set; }
     private RecentItems recentItems = new RecentItems(Enumerable.Empty<RecentItemData>());
+    private string startwindowitemscompletepath => System.IO.Path.Combine(ParetoTool.Resources.Application.APP_FILES_PATH,
+            ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
+
 
     public StartWindow(bool showContinueButton = false)
     {
@@ -417,14 +420,22 @@ public partial class StartWindow : Window
         }
 
         var selectedItem = (from item in recentItems.Items
-                            where item.Path == SelectedItemPath
+                            where item.CompletePath.Replace("/", @"\") == SelectedItemPath
                             select item).FirstOrDefault();
+
+        if (selectedItem == null)
+        {
+
+            return;
+
+        }
 
         recentItems.RemoveItem(selectedItem);
 
-        string completepath = System.IO.Path.Combine(ParetoTool.Resources.Application.APP_FILES_PATH, ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
+        //string startwindowitemscompletepath = System.IO.Path.Combine(ParetoTool.Resources.Application.APP_FILES_PATH, 
+        //    ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
 
-        recentItems.SaveItems(Environment.ExpandEnvironmentVariables(completepath));
+        recentItems.SaveItems(Environment.ExpandEnvironmentVariables(startwindowitemscompletepath));
 
         //Refresh data
 
@@ -457,7 +468,7 @@ public partial class StartWindow : Window
 
         recentItems.AddItem(updatedItem);
 
-        recentItems.SaveItems(ParetoTool.Resources.StartWindow.START_WINDOW_RECENT_ITEMS_FIELNAME);
+        recentItems.SaveItems(startwindowitemscompletepath);
 
         //Refresh data
 

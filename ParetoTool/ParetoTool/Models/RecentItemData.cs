@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SystemIOPath = System.IO.Path;
 
 namespace ParetoTool.Models;
 
@@ -13,6 +14,12 @@ public sealed class RecentItemData
     /// </summary>
     [JsonProperty("name")]
     public string Name { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the complete path of recent item.
+    /// </summary>
+    [JsonIgnore]
+    public string CompletePath => SystemIOPath.Combine(Path, Name);
 
     /// <summary>
     /// Gets or sets the path of the recent item.
@@ -39,7 +46,7 @@ public sealed class RecentItemData
     /// <returns>A string containing the name and path of the recent item.</returns>
     public override string ToString()
     {
-        return $"{Name} ({Path})";
+        return CompletePath;
     }
 
 }
