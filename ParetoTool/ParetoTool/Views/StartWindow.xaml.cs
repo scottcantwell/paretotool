@@ -46,7 +46,7 @@ public partial class StartWindow : Window
 
         var pinnedGroup = new RecentGroup("Pinned", new List<RecentItem>());
 
-        recentItems.LoadItems("C:\\Users\\scant\\Downloads\\recent (3).json");
+        recentItems.LoadItems(startwindowitemscompletepath);
 
         var groupedItems = recentItems.Items
             .GroupBy(item =>
