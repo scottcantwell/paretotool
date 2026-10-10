@@ -64,7 +64,8 @@ public class RecentItems
 
             if (!System.IO.File.Exists(path))
             {
-                throw new FileNotFoundException($"Recent items file not found: {path}");
+                //Add logging here.
+                return;
             }   
             string json = System.IO.File.ReadAllText(path);
 

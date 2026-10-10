@@ -5,6 +5,7 @@ using ParetoTool.Interfaces;
 using ParetoTool.Models;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ParetoTool.Views;
 
@@ -15,6 +16,9 @@ namespace ParetoTool.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
+
+    public static RoutedCommand NewProjectCommand = new RoutedCommand();
+
 
     /// <summary>
     /// Gets the collection of input items that the user can modify in the input grid. Each item represents a category and its corresponding value.
@@ -34,9 +38,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = this;
-     
-    }
 
+        NewProjectCommand.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+        CommandBindings.Add(new CommandBinding(NewProjectCommand, NewProject_Click));
+
+    }
 
     /// <summary>
     /// Handles the click event for the "About" menu item, displaying information about the Pareto Chart Tool in a message box.
@@ -47,7 +53,7 @@ public partial class MainWindow : Window
     {
         MessageBox.Show(
             "This tool allows you to input categories and their corresponding values, " +
-            "and generates a Pareto chart based on the data.\n\n","ParetoTool", MessageBoxButton.OK,MessageBoxImage.Information
+            "and generates a Pareto chart based on the data.\n\n","Pareto Studio", MessageBoxButton.OK,MessageBoxImage.Information
                     );
     }
 
@@ -87,14 +93,20 @@ public partial class MainWindow : Window
     /// <param name="e">The event data.</param>
     private void OpenProject_Click(object sender, RoutedEventArgs e)
     {
+      
+        DisplayOpenProjectDialog();
 
+    }
+
+    private void DisplayOpenProjectDialog()
+    {
         OpenFileDialog openFileDialog = new OpenFileDialog
         {
             Filter = "Pareto Project Files (*.pareto)|*.pareto|All files (*.*)|*.*",
 
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),    
+            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
 
-            Title = "Open Pareto Project"
+            Title = "Open Pareto Stuido Project"
         };
 
         if (openFileDialog.ShowDialog() == true)
@@ -102,8 +114,6 @@ public partial class MainWindow : Window
             string filePath = openFileDialog.FileName;
             OpenProject(filePath);
         }
-
-
     }
 
     public void OpenProject(string filePath)

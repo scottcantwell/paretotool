@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:ParetoTool.Controls"
+        xmlns:local2="ParetoTool.Views"
         Title="ParetoTool"
         Height="720" Width="1200"
         MinHeight="500" MinWidth="800"
@@ -21,12 +22,12 @@
         <StackPanel>
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                 <MenuItem Header="File" x:Name="FileMenu">
-                    <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem"/>
-                    <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem"/>
-                    <MenuItem Header="Edit Project" Click="EditProject_Click" x:Name="EditProjectMenuItem"/>
+                    <MenuItem Header="New Project" Click="NewProject_Click" x:Name="NewProjectMenuItem" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="Open Project" Click="OpenProject_Click" x:Name="OpenProjectMenuItem" InputGestureText="Ctrl+O"/>
+                    <MenuItem Header="Edit Project" Click="EditProject_Click" x:Name="EditProjectMenuItem" InputGestureText="Ctrl+E"/>
                     <MenuItem Header="Start Window" Click="StartWindow_Click" x:Name="StartWindowMenuItem"/>
                     <Separator></Separator>
-                    <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem"/>
+                    <MenuItem Header="Save Project" Click="SaveProject_Click" x:Name="SaveProjectMenuItem" InputGestureText="Ctrl+S"/>
                     <MenuItem Header="Save Project As..." Click="SaveProjectAs_Click" x:Name="SaveProjectAsMenuItem"/>
                     <Separator></Separator>
                     <MenuItem Header="Search for Project" Click="SearchForProject_Click" x:Name="SearchForProjectMenuItem"/>   
@@ -34,7 +35,7 @@
                     <MenuItem Header="Recent Projects" x:Name="RecentProjectsMenuItem" IsEnabled="False">
                     </MenuItem>
                     <Separator x:Name="SeparatorTwoMenuItem"/>
-                    <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem"/>
+                    <MenuItem Header="Exit" Click="Exit_Click" x:Name="ExitMenuItem" InputGestureText="Alt+F4"/>
                 </MenuItem>
                 <MenuItem Header="Edit" x:Name="EditMenu">
                     <MenuItem Header="Copy" Click="Copy_Click" x:Name="CopyMenuItem"/>
